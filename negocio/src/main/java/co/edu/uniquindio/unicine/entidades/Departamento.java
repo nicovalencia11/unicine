@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * Entidad que representa las ciudades de un departamento
+ * Entidad que representa los departamentos de un pais
  */
 @Entity
 @Getter
@@ -15,8 +15,8 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@EqualsAndHashCode( onlyExplicitlyIncluded = true)
-public class Ciudad implements Serializable {
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
+public class Departamento implements Serializable {
 
     @Id
     @EqualsAndHashCode.Include
@@ -26,15 +26,11 @@ public class Ciudad implements Serializable {
     @Column(nullable = false, length = 100)
     private String nombre;
 
-    @ManyToOne
-    private Departamento departamento;
-
-    @OneToMany(mappedBy = "ciudad")
-    private List<Teatro> teatros;
+    @OneToMany(mappedBy = "departamento")
+    private List<Ciudad> ciudades;
 
     @Builder
-    public Ciudad(String nombre, Departamento departamento) {
+    public Departamento(String nombre) {
         this.nombre = nombre;
-        this.departamento = departamento;
     }
 }
