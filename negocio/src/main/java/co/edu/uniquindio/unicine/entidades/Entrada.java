@@ -29,6 +29,7 @@ public class Entrada implements Serializable {
     private Integer silla;
 
     @ManyToOne
+    @ToString.Exclude
     private Venta venta;
 
     @Builder

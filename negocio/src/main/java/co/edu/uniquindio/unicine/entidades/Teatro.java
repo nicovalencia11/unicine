@@ -33,8 +33,10 @@ public class Teatro implements Serializable {
     private String telefono;
 
     @ManyToOne
+    @ToString.Exclude
     private Ciudad ciudad;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "teatro")
     private List<Sala> salas;
 

@@ -38,6 +38,7 @@ public class Confiteria implements Serializable {
     @Column(nullable = false)
     private String descripcion;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "confiteria")
     private List<DetalleVentaConfiteria> detalleVentaConfiteria;
 

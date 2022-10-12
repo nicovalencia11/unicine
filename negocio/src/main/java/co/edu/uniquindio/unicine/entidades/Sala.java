@@ -32,8 +32,10 @@ public class Sala implements Serializable {
     private String distribucion;
 
     @ManyToOne
+    @ToString.Exclude
     private Teatro teatro;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "sala")
     private List<Funcion> funciones;
 

@@ -32,6 +32,7 @@ public class Empleado implements Serializable {
     private String correo;
 
     @OneToOne
+    @ToString.Exclude
     private Usuario usuario;
 
     @Builder

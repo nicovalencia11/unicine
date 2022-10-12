@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unicine.entidades;
 
+import co.edu.uniquindio.unicine.enums.MedioPago;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,19 +28,30 @@ public class Venta implements Serializable {
     @Column(nullable = false)
     private LocalDateTime fecha;
 
+    @Column(nullable = false)
+    private double valorTotal;
+
+    @Column(nullable = false)
+    private MedioPago medioPago;
+
+    @ToString.Exclude
     @OneToMany(mappedBy = "venta")
     private List<Entrada> entradas;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "venta")
     private List<DetalleVentaConfiteria> detalleVentaConfiteria;
 
     @ManyToOne
+    @ToString.Exclude
     private Cupon cupon;
 
     @ManyToOne
+    @ToString.Exclude
     private Cliente cliente;
 
     @ManyToOne
+    @ToString.Exclude
     private HorarioFuncion horarioFuncion;
 
     @Builder

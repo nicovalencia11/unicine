@@ -26,9 +26,11 @@ public class DetalleVentaConfiteria implements Serializable {
     private Integer cantidad;
 
     @ManyToOne
+    @ToString.Exclude
     private Confiteria confiteria;
 
     @ManyToOne
+    @ToString.Exclude
     private Venta venta;
 
     @Builder

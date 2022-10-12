@@ -26,6 +26,7 @@ public class Departamento implements Serializable {
     @Column(nullable = false, length = 100)
     private String nombre;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "departamento")
     private List<Ciudad> ciudades;
 

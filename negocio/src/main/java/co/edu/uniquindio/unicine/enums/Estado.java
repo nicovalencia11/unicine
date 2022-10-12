@@ -7,5 +7,7 @@ package co.edu.uniquindio.unicine.enums;
 public enum Estado {
 
     Activo,
-    Incactivo,
+    Inactivo,
+    CARTELERA,
+    EXPIRADA,
 }

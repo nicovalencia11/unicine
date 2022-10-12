@@ -41,8 +41,10 @@ public class Cupon implements Serializable {
     private Estado estado;
 
     @ManyToMany
+    @ToString.Exclude
     private List<Cliente> clientes;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "cupon")
     private List<Venta> ventas;
 

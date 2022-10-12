@@ -41,15 +41,19 @@ public class Cliente implements Serializable {
     private Estado estado;
 
     @OneToOne
+    @ToString.Exclude
     private Usuario usuario;
 
     @OneToMany(mappedBy = "cliente")
+    @ToString.Exclude
     private List<Telefono> telefono;
 
     @ManyToMany(mappedBy = "clientes")
+    @ToString.Exclude
     private List<Cupon> cupones;
 
     @OneToMany(mappedBy = "cliente")
+    @ToString.Exclude
     private List<Venta> ventas;
 
     @Builder

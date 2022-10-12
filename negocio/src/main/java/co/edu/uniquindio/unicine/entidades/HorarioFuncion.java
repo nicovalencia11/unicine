@@ -33,8 +33,10 @@ public class HorarioFuncion implements Serializable {
     private String distribucionVentas;
 
     @ManyToOne
+    @ToString.Exclude
     private Funcion funcion;
 
+    @ToString.Exclude
     @OneToMany(mappedBy = "horarioFuncion")
     private List<Venta> ventas;
 

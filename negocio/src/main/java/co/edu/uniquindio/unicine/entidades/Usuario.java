@@ -33,17 +33,17 @@ public class Usuario implements Serializable {
     private Rol rol;
 
     @OneToOne(mappedBy = "usuario")
+    @ToString.Exclude
     private Empleado empleado;
 
     @OneToOne(mappedBy = "usuario")
+    @ToString.Exclude
     private Cliente cliente;
 
     @Builder
-    public Usuario(String nombreUsuario, String password, Rol rol, Empleado empleado, Cliente cliente) {
+    public Usuario(String nombreUsuario, String password, Rol rol) {
         this.nombreUsuario = nombreUsuario;
         this.password = password;
         this.rol = rol;
-        this.empleado = empleado;
-        this.cliente = cliente;
     }
 }

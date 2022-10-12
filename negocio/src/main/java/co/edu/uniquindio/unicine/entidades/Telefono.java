@@ -26,6 +26,7 @@ public class Telefono implements Serializable {
     private String telefono;
 
     @ManyToOne
+    @ToString.Exclude
     private Cliente cliente;
 
     @Builder
