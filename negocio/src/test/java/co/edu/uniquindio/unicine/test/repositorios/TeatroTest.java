@@ -1,8 +1,8 @@
-package co.edu.uniquindio.unicine.test;
-
+package co.edu.uniquindio.unicine.test.repositorios;
 
 import co.edu.uniquindio.unicine.entidades.Ciudad;
-import co.edu.uniquindio.unicine.repositorios.CiudadRepositorio;
+import co.edu.uniquindio.unicine.entidades.Teatro;
+import co.edu.uniquindio.unicine.repositorios.TeatroRepositorio;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,18 +14,17 @@ import java.util.List;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class CiudadTest {
+public class TeatroTest {
 
     @Autowired
-    private CiudadRepositorio ciudadRepositorio;
+    private TeatroRepositorio teatroRepositorio;
 
     @Test
     @Sql("classpath:dataset.sql")
     public void obtenerCiudadesDepartamento(){
-
-        List<Ciudad> ciudades = ciudadRepositorio.obtenerCiudadesByDepartamento("Quindio");
-        ciudades.forEach(System.out::println);
-        Assertions.assertNotNull(ciudades);
+        List<Teatro> teatros = teatroRepositorio.listar("Armenia");
+        teatros.forEach(System.out::println);
+        Assertions.assertNotNull(teatros);
     }
 
 }

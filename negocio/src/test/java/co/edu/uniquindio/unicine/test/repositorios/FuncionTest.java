@@ -1,4 +1,4 @@
-package co.edu.uniquindio.unicine.test;
+package co.edu.uniquindio.unicine.test.repositorios;
 
 import co.edu.uniquindio.unicine.dtos.FuncionDTO;
 import co.edu.uniquindio.unicine.entidades.Ciudad;

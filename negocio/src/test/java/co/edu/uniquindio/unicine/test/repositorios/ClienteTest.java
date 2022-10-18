@@ -1,4 +1,4 @@
-package co.edu.uniquindio.unicine.test;
+package co.edu.uniquindio.unicine.test.repositorios;
 
 import co.edu.uniquindio.unicine.entidades.Cliente;
 import co.edu.uniquindio.unicine.entidades.Cupon;

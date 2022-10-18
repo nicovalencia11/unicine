@@ -11,7 +11,6 @@ insert into cliente values (2,"123","juan@gmail.com", 1,"ruta","juan",2);
 insert into cliente values (3,"1234","camilo@gmail.com", 1,"ruta","camilo",3);
 insert into cliente values (4,"12345","pepe@gmail.com", 1,"ruta","pepe",4);
 insert into cliente values (5,"123456","oscar@gmail.com", 1,"ruta","oscar",5);
-insert into cliente values (6,"1234567","pedro@gmail.com", 1,"ruta","pedro",5);
 
 
 --insert departamentos

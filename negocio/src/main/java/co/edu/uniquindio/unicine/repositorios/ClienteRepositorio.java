@@ -14,10 +14,12 @@ import java.util.List;
 @Repository
 public interface ClienteRepositorio extends JpaRepository<Cliente, Integer> {
 
-    @Query("select c from Cliente c where c.correo=?1")
+    @Query("select c from Cliente c where c.correo=:email")
     Cliente obtener(String email);
 
     Cliente findByCorreo(String email);
+
+    Cliente findByCorreoAndCedula(String email, String cedula);
 
     @Query("select c.cupones from Cliente c where c.correo = :correo")
     List<Cupon> listarCuponesCliente(String correo);
