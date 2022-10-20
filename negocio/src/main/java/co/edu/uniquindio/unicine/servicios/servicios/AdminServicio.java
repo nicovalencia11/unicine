@@ -1,5 +1,6 @@
 package co.edu.uniquindio.unicine.servicios.servicios;
 
+import co.edu.uniquindio.unicine.entidades.Ciudad;
 import co.edu.uniquindio.unicine.entidades.Confiteria;
 import co.edu.uniquindio.unicine.entidades.Cupon;
 import co.edu.uniquindio.unicine.entidades.Pelicula;
@@ -122,4 +123,42 @@ public interface AdminServicio {
      * @throws Exception
      */
     Cupon consultarCupon(Integer codigoCupon) throws Exception;
+
+    /**
+     * Metodo que permite registrar una ciudad
+     * @param ciudad
+     * @return
+     * @throws Exception
+     */
+    Ciudad registrarCiudad(Ciudad ciudad) throws Exception;
+
+    /**
+     * Metodo que permite actualizar una ciudad
+     * @param ciudad
+     * @return
+     * @throws Exception
+     */
+    Ciudad actualizarCiudad(Ciudad ciudad) throws Exception;
+
+    /**
+     * metodo que permite eliminar una ciudad
+     * @param codigoCiudad
+     * @throws Exception
+     */
+    void eliminarCiudad(Integer codigoCiudad) throws Exception;
+
+    /**
+     * Metodo que permite listar todas las ciudades
+     * @return
+     */
+    List<Ciudad> listarCiudades();
+
+    /**
+     * Metodo que permite consultar una ciudad dado su id
+     * @param codigoCiudad
+     * @return
+     * @throws Exception
+     */
+    Ciudad consultarCiudad(Integer codigoCiudad) throws Exception;
+
 }
