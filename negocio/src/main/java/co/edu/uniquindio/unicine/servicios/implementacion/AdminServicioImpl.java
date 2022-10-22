@@ -1,7 +1,9 @@
 package co.edu.uniquindio.unicine.servicios.implementacion;
 
 import co.edu.uniquindio.unicine.entidades.*;
+import co.edu.uniquindio.unicine.repositorios.*;
 import co.edu.uniquindio.unicine.servicios.servicios.AdminServicio;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,6 +14,18 @@ import java.util.List;
 @Service
 public class AdminServicioImpl implements AdminServicio {
 
+    @Autowired
+    private PeliculaRepositorio peliculaRepositorio;
+
+    @Autowired
+    private ConfiteriaRepositorio confiteriaRepositorio;
+
+    @Autowired
+    private CuponRepositorio cuponRepositorio;
+
+    @Autowired
+    private CiudadRepositorio ciudadRepositorio;
+
     /**
      * Metodo que permite registrar una pelicula
      *
@@ -21,7 +35,14 @@ public class AdminServicioImpl implements AdminServicio {
      */
     @Override
     public Pelicula registrarPelicula(Pelicula pelicula) throws Exception {
-        return null;
+        Pelicula peliculaBuscada = consultarPelicula(pelicula.getCodigo());
+
+        if(peliculaBuscada != null)
+        {
+            throw new Exception("La pelicula ya está registrada en el sistema");
+
+        }
+        return peliculaRepositorio.save(pelicula);
     }
 
     /**
@@ -33,7 +54,8 @@ public class AdminServicioImpl implements AdminServicio {
      */
     @Override
     public Pelicula actualizarPelicula(Pelicula pelicula) throws Exception {
-        return null;
+        verificarCodigoPelicula(pelicula.getCodigo());
+        return peliculaRepositorio.save(pelicula);
     }
 
     /**
@@ -44,7 +66,8 @@ public class AdminServicioImpl implements AdminServicio {
      */
     @Override
     public void eliminarPelicula(Integer codigoPelicula) throws Exception {
-
+        Pelicula pelicula = consultarPelicula(codigoPelicula);
+        peliculaRepositorio.delete(pelicula);
     }
 
     /**
@@ -54,7 +77,7 @@ public class AdminServicioImpl implements AdminServicio {
      */
     @Override
     public List<Pelicula> listarPeliculas() {
-        return null;
+        return peliculaRepositorio.findAll();
     }
 
     /**
@@ -66,7 +89,22 @@ public class AdminServicioImpl implements AdminServicio {
      */
     @Override
     public Pelicula consultarPelicula(Integer codigoPelicula) throws Exception {
-        return null;
+        verificarCodigoPelicula(codigoPelicula);
+        return peliculaRepositorio.findById(codigoPelicula).orElse(null);
+    }
+
+    /**
+     * * Metodo que permite verificar si una pelicula existe dado su id
+     * @param codigoPelicula
+     *  @throws Exception
+     */
+
+    private void verificarCodigoPelicula(Integer codigoPelicula) throws Exception {
+
+        Pelicula peliculaGuardada = peliculaRepositorio.findById(codigoPelicula).orElse(null);
+        if (peliculaGuardada == null){
+            throw new Exception("La pelicula no existe en el sistema");
+        }
     }
 
     /**
@@ -78,7 +116,14 @@ public class AdminServicioImpl implements AdminServicio {
      */
     @Override
     public Confiteria registrarConfiteria(Confiteria confiteria) throws Exception {
-        return null;
+        Confiteria confiteriaBuscada = consultarConfiteria(confiteria.getCodigo());
+
+        if(confiteriaBuscada != null)
+        {
+            throw new Exception("La pelicula ya está registrada en el sistema");
+        }
+
+        return confiteriaRepositorio.save(confiteria);
     }
 
     /**
@@ -89,8 +134,9 @@ public class AdminServicioImpl implements AdminServicio {
      * @throws Exception
      */
     @Override
-    public Confiteria ActualizarConfiteria(Confiteria confiteria) throws Exception {
-        return null;
+    public Confiteria actualizarConfiteria(Confiteria confiteria) throws Exception {
+        verificarCodigoConfiteria(confiteria.getCodigo());
+        return confiteriaRepositorio.save(confiteria);
     }
 
     /**
@@ -101,7 +147,8 @@ public class AdminServicioImpl implements AdminServicio {
      */
     @Override
     public void eliminarConfiteria(Integer codigoConfiteria) throws Exception {
-
+        Confiteria confiteria = consultarConfiteria(codigoConfiteria);
+        confiteriaRepositorio.delete(confiteria);
     }
 
     /**
@@ -111,7 +158,7 @@ public class AdminServicioImpl implements AdminServicio {
      */
     @Override
     public List<Confiteria> listarConfiterias() {
-        return null;
+        return confiteriaRepositorio.findAll();
     }
 
     /**
@@ -123,7 +170,22 @@ public class AdminServicioImpl implements AdminServicio {
      */
     @Override
     public Confiteria consultarConfiteria(Integer codigoConfiteria) throws Exception {
-        return null;
+        verificarCodigoConfiteria(codigoConfiteria);
+        return confiteriaRepositorio.findById(codigoConfiteria).orElse(null);
+    }
+
+    /**
+     * * Metodo que permite verificar si una pelicula existe dado su id
+     * @param codigoConfiteria
+     *  @throws Exception
+     */
+
+    private void verificarCodigoConfiteria(Integer codigoConfiteria) throws Exception {
+
+        Confiteria confiteriaGuardada = confiteriaRepositorio.findById(codigoConfiteria).orElse(null);
+        if (confiteriaGuardada == null){
+            throw new Exception("La confiteria no existe en el sistema");
+        }
     }
 
     /**
@@ -135,7 +197,14 @@ public class AdminServicioImpl implements AdminServicio {
      */
     @Override
     public Cupon registrarCupon(Cupon cupon) throws Exception {
-        return null;
+        Cupon cuponBuscado = consultarCupon(cupon.getCodigo());
+
+        if(cuponBuscado != null)
+        {
+            throw new Exception("El cupon ya está registrado en el sistema");
+
+        }
+        return cuponRepositorio.save(cupon);
     }
 
     /**
@@ -147,7 +216,8 @@ public class AdminServicioImpl implements AdminServicio {
      */
     @Override
     public Cupon actualizarCupon(Cupon cupon) throws Exception {
-        return null;
+        verificarCodigoCupon(cupon.getCodigo());
+        return cuponRepositorio.save(cupon);
     }
 
     /**
@@ -158,7 +228,8 @@ public class AdminServicioImpl implements AdminServicio {
      */
     @Override
     public void eliminarCupon(Integer codigoCupon) throws Exception {
-
+        Cupon cupon = consultarCupon(codigoCupon);
+        cuponRepositorio.delete(cupon);
     }
 
     /**
@@ -168,7 +239,7 @@ public class AdminServicioImpl implements AdminServicio {
      */
     @Override
     public List<Cupon> listarCupones() {
-        return null;
+        return cuponRepositorio.findAll();
     }
 
     /**
@@ -180,8 +251,24 @@ public class AdminServicioImpl implements AdminServicio {
      */
     @Override
     public Cupon consultarCupon(Integer codigoCupon) throws Exception {
-        return null;
+        verificarCodigoCupon(codigoCupon);
+        return cuponRepositorio.findById(codigoCupon).orElse(null);
     }
+
+    /**
+     * * Metodo que permite verificar si un cupon existe dado su id
+     * @param codigoCupon
+     *  @throws Exception
+     */
+
+    private void verificarCodigoCupon(Integer codigoCupon) throws Exception {
+
+        Cupon cuponGuardado = cuponRepositorio.findById(codigoCupon).orElse(null);
+        if (cuponGuardado == null){
+            throw new Exception("El cupón no existe en el sistema");
+        }
+    }
+
 
     /**
      * Metodo que permite registrar una ciudad
@@ -192,7 +279,14 @@ public class AdminServicioImpl implements AdminServicio {
      */
     @Override
     public Ciudad registrarCiudad(Ciudad ciudad) throws Exception {
-        return null;
+        Ciudad ciudadBuscada = consultarCiudad(ciudad.getCodigo());
+
+        if(ciudadBuscada != null)
+        {
+            throw new Exception("La ciudad ya está registrado en el sistema");
+
+        }
+        return ciudadRepositorio.save(ciudad);
     }
 
     /**
@@ -204,7 +298,8 @@ public class AdminServicioImpl implements AdminServicio {
      */
     @Override
     public Ciudad actualizarCiudad(Ciudad ciudad) throws Exception {
-        return null;
+        verificarCodigoCiudad(ciudad.getCodigo());
+        return ciudadRepositorio.save(ciudad);
     }
 
     /**
@@ -215,6 +310,8 @@ public class AdminServicioImpl implements AdminServicio {
      */
     @Override
     public void eliminarCiudad(Integer codigoCiudad) throws Exception {
+        Ciudad ciudad = consultarCiudad(codigoCiudad);
+        ciudadRepositorio.delete(ciudad);
 
     }
 
@@ -225,7 +322,7 @@ public class AdminServicioImpl implements AdminServicio {
      */
     @Override
     public List<Ciudad> listarCiudades() {
-        return null;
+        return ciudadRepositorio.findAll();
     }
 
     /**
@@ -237,8 +334,24 @@ public class AdminServicioImpl implements AdminServicio {
      */
     @Override
     public Ciudad consultarCiudad(Integer codigoCiudad) throws Exception {
-        return null;
+        verificarCodigoCiudad(codigoCiudad);
+        return ciudadRepositorio.findById(codigoCiudad).orElse(null);
     }
+
+    /**
+     * * Metodo que permite verificar si una ciudad existe dado su id
+     * @param codigoCiudad
+     *  @throws Exception
+     */
+    private void verificarCodigoCiudad(Integer codigoCiudad) throws Exception {
+
+        Ciudad ciudadGuardada = ciudadRepositorio.findById(codigoCiudad).orElse(null);
+        if (ciudadGuardada == null){
+            throw new Exception("La confiteria no existe en el sistema");
+        }
+    }
+
+
 
     /**
      * Metodo que permite registrar el empleado

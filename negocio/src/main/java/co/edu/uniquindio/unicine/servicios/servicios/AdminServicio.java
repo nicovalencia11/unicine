@@ -61,7 +61,7 @@ public interface AdminServicio {
      * @return
      * @throws Exception
      */
-    Confiteria ActualizarConfiteria(Confiteria confiteria) throws Exception;
+    Confiteria actualizarConfiteria(Confiteria confiteria) throws Exception;
 
     /**
      * Metodo que permite eliminar una confiteria
