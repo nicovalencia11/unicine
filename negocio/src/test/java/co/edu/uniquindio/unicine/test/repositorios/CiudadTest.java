@@ -19,13 +19,4 @@ public class CiudadTest {
     @Autowired
     private CiudadRepositorio ciudadRepositorio;
 
-    @Test
-    @Sql("classpath:dataset.sql")
-    public void obtenerCiudadesDepartamento(){
-
-        List<Ciudad> ciudades = ciudadRepositorio.obtenerCiudadesByDepartamento("Quindio");
-        ciudades.forEach(System.out::println);
-        Assertions.assertNotNull(ciudades);
-    }
-
 }

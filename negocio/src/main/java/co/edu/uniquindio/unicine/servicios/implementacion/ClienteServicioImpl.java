@@ -25,6 +25,14 @@ public class ClienteServicioImpl implements ClienteServicio {
     private FuncionRepositorio funcionRepositorio;
     @Autowired
     private PeliculaRepositorio peliculaRepositorio;
+    @Autowired
+    private HorarioFuncionRepositorio horarioFuncionRepositorio;
+    @Autowired
+    private VentaRepositorio ventaRepositorio;
+    @Autowired
+    private CuponRepositorio cuponRepositorio;
+    @Autowired
+    private ConfiteriaRepositorio confiteriaRepositorio;
 
     /**
      * Metodo que permite registrar un cliente
@@ -156,8 +164,8 @@ public class ClienteServicioImpl implements ClienteServicio {
      */
     @Override
     public Venta registrarVenta(Venta venta) throws Exception {
-
-        return null;
+        validarInformacionVenta(venta);
+        return ventaRepositorio.save(venta);
     }
 
     /**
@@ -168,8 +176,14 @@ public class ClienteServicioImpl implements ClienteServicio {
      * @throws Exception
      */
     @Override
-    public Venta aplicarDescuentoCupon(Cupon cupon) throws Exception {
-        return null;
+    public Venta aplicarDescuentoCupon(Venta venta, Cupon cupon) throws Exception {
+        Cupon cuponAlmacenado = cuponRepositorio.findById(cupon.getCodigo()).orElse(null);
+        if(cuponAlmacenado == null){
+            throw new Exception("El cupon no existe en el sistema");
+        }
+        venta.setCupon(cuponAlmacenado);
+        venta.setValorTotal(venta.getValorTotal() - (venta.getValorTotal() * cupon.getDescuento()));
+        return venta;
     }
 
     /**
@@ -180,7 +194,49 @@ public class ClienteServicioImpl implements ClienteServicio {
      */
     @Override
     public List<Venta> listarVentas(Integer codigoCliente) {
-        return null;
+        return ventaRepositorio.ventasCliente(codigoCliente);
+    }
+
+    /**
+     * Metodo que permite calificar una pelicula por el cliente
+     *
+     * @param calificacion
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Pelicula calificarPelicula(Pelicula pelicula, Integer calificacion) throws Exception {
+        if (calificacion < 0 || calificacion > 5){
+            throw new Exception("La calificacion debe ser un numero entre 0 y 5");
+        }
+        Pelicula peliculaAlmacenada = peliculaRepositorio.findById(pelicula.getCodigo()).orElse(null);
+        if (peliculaAlmacenada == null) {
+            throw new Exception("La pelicula no existe en el sistema");
+        }
+        peliculaAlmacenada.setCalificacion(peliculaAlmacenada.getCalificacion() + calificacion);
+        peliculaAlmacenada.setCalificadores(peliculaAlmacenada.getCalificadores() + 1);
+        return peliculaRepositorio.save(peliculaAlmacenada);
+    }
+
+    /**
+     * Metodo que permite calificar una confiteria por el cliente
+     *
+     * @param calificacion
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Confiteria calificarConfiteria(Confiteria confiteria, Integer calificacion) throws Exception {
+        if (calificacion < 0 || calificacion > 5){
+            throw new Exception("La calificacion debe ser un numero entre 0 y 5");
+        }
+        Confiteria confiteriaAlmacenada = confiteriaRepositorio.findById(confiteria.getCodigo()).orElse(null);
+        if (confiteriaAlmacenada == null) {
+            throw new Exception("La confiteria no existe en el sistema");
+        }
+        confiteriaAlmacenada.setCalificacion(confiteriaAlmacenada.getCalificacion() + calificacion);
+        confiteriaAlmacenada.setCalificadores(confiteriaAlmacenada.getCalificadores() + 1);
+        return confiteriaRepositorio.save(confiteriaAlmacenada);
     }
 
     /**
@@ -205,6 +261,32 @@ public class ClienteServicioImpl implements ClienteServicio {
         Cliente clienteGuardado = clienteRepositorio.findById(codigoCliente).orElse(null);
         if (clienteGuardado == null){
             throw new Exception("El Cliente no existe en el sistema");
+        }
+    }
+
+    /**
+     * Metodo que permite validar la informacion de una venta
+     * @param venta
+     * @throws Exception
+     */
+    private void validarInformacionVenta(Venta venta) throws Exception {
+        //Se validan los campos de la venta
+        if (venta.getFecha() == null) {
+            throw new Exception("El campo fecha es obligatorio");
+        } else if(venta.getMedioPago() == null){
+            throw new Exception("El campo medio de pago es obligatorio");
+        } else if(venta.getValorTotal() == 0){
+            throw new Exception("El valor total es obligatorio");
+        }
+        //Se valida el cliente
+        Cliente cliente = clienteRepositorio.findById(venta.getCliente().getCodigo()).orElse(null);
+        if(cliente == null){
+            throw new Exception("El cliente es obligatorio");
+        }
+        //Se valida el horario de la funcion
+        HorarioFuncion horarioFuncion = horarioFuncionRepositorio.findById(venta.getHorarioFuncion().getCodigo()).orElse(null);
+        if(horarioFuncion == null){
+            throw new Exception("El horario de la funcion es obligatorio");
         }
     }
 

@@ -55,7 +55,12 @@ public class Venta implements Serializable {
     private HorarioFuncion horarioFuncion;
 
     @Builder
-    public Venta(LocalDateTime fecha) {
+    public Venta(LocalDateTime fecha, double valorTotal, MedioPago medioPago, Cupon cupon, Cliente cliente, HorarioFuncion horarioFuncion) {
         this.fecha = fecha;
+        this.valorTotal = valorTotal;
+        this.medioPago = medioPago;
+        this.cupon = cupon;
+        this.cliente = cliente;
+        this.horarioFuncion = horarioFuncion;
     }
 }

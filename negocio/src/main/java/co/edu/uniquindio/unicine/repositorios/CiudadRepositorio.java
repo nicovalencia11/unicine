@@ -13,7 +13,4 @@ import java.util.List;
 @Repository
 public interface CiudadRepositorio extends JpaRepository<Ciudad, Integer> {
 
-
-    @Query("select c from Ciudad c where c.departamento.nombre=?1")
-    List<Ciudad> obtenerCiudadesByDepartamento(String departamento);
 }

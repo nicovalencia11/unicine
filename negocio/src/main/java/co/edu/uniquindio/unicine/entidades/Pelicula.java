@@ -48,7 +48,12 @@ public class Pelicula implements Serializable {
     @Column(nullable = false)
     private Estado estado;
 
-    //preguntar al profesor sobre lista de enums
+    @Column(nullable = false)
+    private Double calificacion;
+
+    @Column(nullable = false)
+    private Integer calificadores;
+
     @Column(nullable = false)
     @ElementCollection
     private List<Genero> generos;

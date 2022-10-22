@@ -21,4 +21,6 @@ public interface VentaRepositorio extends JpaRepository<Venta, Integer> {
     @Query("select e from Venta v join v.entradas e where v.codigo = :idCompra")
     List<Entrada> entradasPorCompra(Integer idCompra);
 
+    @Query("select v from Venta v where v.cliente.codigo = :codigoCliente")
+    List<Venta> ventasCliente(Integer codigoCliente);
 }
