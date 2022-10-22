@@ -1,7 +1,6 @@
 package co.edu.uniquindio.unicine.test.servicios;
 
-import co.edu.uniquindio.unicine.entidades.Cliente;
-import co.edu.uniquindio.unicine.entidades.Usuario;
+import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.enums.Estado;
 import co.edu.uniquindio.unicine.enums.Rol;
 import co.edu.uniquindio.unicine.servicios.implementacion.ClienteServicioImpl;
@@ -14,6 +13,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Clase de prueba para los servicios de un cliente
+ */
 @SpringBootTest
 @Transactional
 public class ClienteTest {
@@ -21,6 +23,9 @@ public class ClienteTest {
     @Autowired
     private ClienteServicioImpl clienteServicio;
 
+    /**
+     * Metodo de prueba para rgeistrar un cliente
+     */
     @Test
     @Sql("classpath:dataset.sql")
     public void registrarCliente() {
@@ -34,6 +39,9 @@ public class ClienteTest {
         }
     }
 
+    /**
+     * Metodo de prueba para actualizar un cliente
+     */
     @Test
     @Sql("classpath:dataset.sql")
     public void actualizarCliente() {
@@ -52,6 +60,9 @@ public class ClienteTest {
         }
     }
 
+    /**
+     * Metodo de prueba para eliminar un cliente
+     */
     @Test
     @Sql("classpath:dataset.sql")
     public void eliminarCliente() {
@@ -63,6 +74,9 @@ public class ClienteTest {
         }
     }
 
+    /**
+     * Metodo de prueba para listar los clientes
+     */
     @Test
     @Sql("classpath:dataset.sql")
     public void listarClientes() {
@@ -70,6 +84,9 @@ public class ClienteTest {
         Assertions.assertTrue(true);
     }
 
+    /**
+     * Metodo de prueba para consultar un cliente
+     */
     @Test
     @Sql("classpath:dataset.sql")
     public void consultarCliente() {
@@ -81,4 +98,55 @@ public class ClienteTest {
         }
     }
 
+    /**
+     * Metodo de prueba para listar ciudades
+     */
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarCiudades() {
+        List<Ciudad> ciudades = clienteServicio.listarCiudades();
+        Assertions.assertNotNull(ciudades);
+    }
+
+    /**
+     * Metodo de prueba para listar los teatros de una ciudad
+     */
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarTeatrosCiudad() {
+        try {
+            List<Teatro> teatros =clienteServicio.listarTeatrosCiudad(1);
+            Assertions.assertNotNull(teatros);
+        } catch (Exception e) {
+            Assertions.assertTrue(false);
+        }
+    }
+
+    /**
+     * Metodo de prueba para listar las peliculas en cartelera y preventa
+     */
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarPeliculasCartelera() {
+        try {
+            List<Pelicula> peliculas = clienteServicio.listarPeliculasCartelera(1);
+            Assertions.assertNotNull(peliculas);
+        } catch (Exception e) {
+            Assertions.assertTrue(false);
+        }
+    }
+
+    /**
+     * Metodo de prueba para listar las funciones de una pelicula
+     */
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarFuncionesPelicula() {
+        try {
+            List<Funcion> funciones = clienteServicio.listarFuncionesPelicula(1,1);
+            Assertions.assertNotNull(funciones);
+        } catch (Exception e) {
+            Assertions.assertTrue(false);
+        }
+    }
 }

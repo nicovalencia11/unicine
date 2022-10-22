@@ -1,7 +1,8 @@
 package co.edu.uniquindio.unicine.servicios.implementacion;
 
 import co.edu.uniquindio.unicine.entidades.*;
-import co.edu.uniquindio.unicine.repositorios.ClienteRepositorio;
+import co.edu.uniquindio.unicine.enums.Estado;
+import co.edu.uniquindio.unicine.repositorios.*;
 import co.edu.uniquindio.unicine.servicios.servicios.ClienteServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,14 @@ public class ClienteServicioImpl implements ClienteServicio {
 
     @Autowired
     private ClienteRepositorio clienteRepositorio;
+    @Autowired
+    private CiudadRepositorio ciudadRepositorio;
+    @Autowired
+    private TeatroRepositorio teatroRepositorio;
+    @Autowired
+    private FuncionRepositorio funcionRepositorio;
+    @Autowired
+    private PeliculaRepositorio peliculaRepositorio;
 
     /**
      * Metodo que permite registrar un cliente
@@ -87,7 +96,7 @@ public class ClienteServicioImpl implements ClienteServicio {
      */
     @Override
     public List<Ciudad> listarCiudades() {
-        return null;
+        return ciudadRepositorio.findAll();
     }
 
     /**
@@ -97,8 +106,12 @@ public class ClienteServicioImpl implements ClienteServicio {
      * @return
      */
     @Override
-    public List<Teatro> listarTeatrosCiudad(Integer codigoCiudad) {
-        return null;
+    public List<Teatro> listarTeatrosCiudad(Integer codigoCiudad)  throws Exception {
+        Ciudad ciudad = ciudadRepositorio.findById(codigoCiudad).orElse(null);
+        if(ciudad == null){
+            throw new Exception("La ciudad no existe en el sistema");
+        }
+        return teatroRepositorio.listarTeatrosByCiudad(codigoCiudad);
     }
 
     /**
@@ -108,20 +121,30 @@ public class ClienteServicioImpl implements ClienteServicio {
      * @return
      */
     @Override
-    public List<Pelicula> listarPeliculasCartelera(Integer codigoTeatro) {
-        return null;
+    public List<Pelicula> listarPeliculasCartelera(Integer codigoTeatro)  throws Exception {
+        Teatro teatro = teatroRepositorio.findById(codigoTeatro).orElse(null);
+        if(teatro == null){
+            throw new Exception("El teatro no existe en el sistema");
+        }
+        return funcionRepositorio.listarPeliculasCartelera(codigoTeatro, Estado.CARTELERA, Estado.PREVENTA);
     }
 
     /**
      * Metodo que permite listar las funciones de una pelicula
+     * en un teatro especifico
      *
      * @param codigoPelicula
      * @param codigoTeatro
      * @return
      */
     @Override
-    public List<Funcion> listarFuncionesPelicula(Integer codigoPelicula, Integer codigoTeatro) {
-        return null;
+    public List<Funcion> listarFuncionesPelicula(Integer codigoPelicula, Integer codigoTeatro) throws Exception {
+        Pelicula pelicula = peliculaRepositorio.findById(codigoPelicula).orElse(null);
+        Teatro teatro = teatroRepositorio.findById(codigoTeatro).orElse(null);
+        if(pelicula == null || teatro == null){
+            throw new Exception("La pelicula o el teatro no existen en el sistema");
+        }
+        return funcionRepositorio.listarFuncionesPeliculaTeatro(codigoPelicula,codigoTeatro);
     }
 
     /**
@@ -133,6 +156,7 @@ public class ClienteServicioImpl implements ClienteServicio {
      */
     @Override
     public Venta registrarVenta(Venta venta) throws Exception {
+
         return null;
     }
 

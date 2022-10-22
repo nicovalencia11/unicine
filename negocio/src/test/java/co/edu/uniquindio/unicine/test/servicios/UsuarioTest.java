@@ -14,6 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+/**
+ * Clase de pruebas unitarias para los servicios de un usuario
+ */
 @SpringBootTest
 @Transactional
 public class UsuarioTest {

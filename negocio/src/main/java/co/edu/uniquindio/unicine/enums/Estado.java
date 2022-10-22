@@ -9,5 +9,6 @@ public enum Estado {
     Activo,
     Inactivo,
     CARTELERA,
+    PREVENTA,
     EXPIRADA,
 }

@@ -57,21 +57,21 @@ public interface ClienteServicio {
      * @param codigoCiudad
      * @return
      */
-    List<Teatro> listarTeatrosCiudad(Integer codigoCiudad);
+    List<Teatro> listarTeatrosCiudad(Integer codigoCiudad) throws Exception;
 
     /**
      * Metodo que permite listar las peliculas en cartelera de un teatro
      * @param codigoTeatro
      * @return
      */
-    List<Pelicula> listarPeliculasCartelera(Integer codigoTeatro);
+    List<Pelicula> listarPeliculasCartelera(Integer codigoTeatro) throws Exception;
 
     /**
      * Metodo que permite listar las funciones de una pelicula dado el teatro y el id de la pelicula
      * @param codigoPelicula
      * @return
      */
-    List<Funcion> listarFuncionesPelicula(Integer codigoPelicula, Integer codigoTeatro);
+    List<Funcion> listarFuncionesPelicula(Integer codigoPelicula, Integer codigoTeatro) throws Exception;
 
     /**
      * Metodo que permite registrar una venta

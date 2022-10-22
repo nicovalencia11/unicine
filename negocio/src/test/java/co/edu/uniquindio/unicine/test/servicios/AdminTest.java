@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
+/**
+ * Clase de pruebas unitarias para los servicios de un administrador
+ */
 @SpringBootTest
 @Transactional
 public class AdminTest {
