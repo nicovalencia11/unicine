@@ -77,12 +77,28 @@ insert into horario_funcion values (4, "{}", '2022-10-10 17:30:00', 4);
 insert into horario_funcion values (5, "{}", '2022-10-10 17:30:00', 5);
 
 
+-- insert cupon
+insert into cupon values (1, "cupon descuento 1", "20% de descuento para nuevo clientes", 0.2, 0, '2022-10-31');
+insert into cupon values (2, "cupon descuento 2", "10% de descuento para empleados edeq", 0.1, 0, '2022-10-31');
+insert into cupon values (3, "cupon descuento 3", "15% de descuento para niños menores de edad", 0.15, 0, '2022-10-31');
+insert into cupon values (4, "cupon descuento 4", "30% de descuento para adultos mayores de 50", 0.3, 0, '2022-10-31');
+insert into cupon values (5, "cupon descuento 6", "10% de descuento para clientes antiguos", 0.1, 0, '2022-10-31');
+
+
+-- insert cupon clientes
+insert into cupon_clientes values (1, 1);
+insert into cupon_clientes values (1, 2);
+insert into cupon_clientes values (1, 3);
+insert into cupon_clientes values (1, 4);
+insert into cupon_clientes values (1, 5);
+
+
 -- insert venta
-insert into venta values (1, '2022-10-10 17:30:00', 1, 1, null, 1, 0);
-insert into venta values (2, '2022-10-10 17:30:00', 1, 5, null, 2, 0);
-insert into venta values (3, '2022-10-10 17:30:00', 1, 2, null, 3, 0);
-insert into venta values (4, '2022-10-10 17:30:00', 1, 3, null, 4, 0);
-insert into venta values (5, '2022-10-10 17:30:00', 1, 4, null, 5, 0);
+insert into venta values (1, '2022-10-10 17:30:00', 1, 50000, 1, 1, 1);
+insert into venta values (2, '2022-10-10 17:30:00', 1, 50000, 2, 2, 2);
+insert into venta values (3, '2022-10-10 17:30:00', 1, 50000, 3, 3, 3);
+insert into venta values (4, '2022-10-10 17:30:00', 1, 50000, 4, 4, 4);
+insert into venta values (5, '2022-10-10 17:30:00', 1, 50000, 5, 5, 5);
 
 
 -- insert confiteria
@@ -99,22 +115,6 @@ insert into detalle_venta_confiteria values (2, 1, 2, 1);
 insert into detalle_venta_confiteria values (3, 3, 2, 2);
 insert into detalle_venta_confiteria values (4, 1, 3, 3);
 insert into detalle_venta_confiteria values (5, 1, 4, 4);
-
-
--- insert cupon
-insert into cupon values (1, "cupon descuento 1", "20% de descuento para nuevo clientes", 0.2, 0, '2022-10-31');
-insert into cupon values (2, "cupon descuento 2", "10% de descuento para empleados edeq", 0.1, 0, '2022-10-31');
-insert into cupon values (3, "cupon descuento 3", "15% de descuento para niños menores de edad", 0.15, 0, '2022-10-31');
-insert into cupon values (4, "cupon descuento 4", "30% de descuento para adultos mayores de 50", 0.3, 0, '2022-10-31');
-insert into cupon values (5, "cupon descuento 6", "10% de descuento para clientes antiguos", 0.1, 0, '2022-10-31');
-
-
--- insert cupon clientes
-insert into cupon_clientes values (1, 1);
-insert into cupon_clientes values (1, 2);
-insert into cupon_clientes values (1, 3);
-insert into cupon_clientes values (1, 4);
-insert into cupon_clientes values (1, 5);
 
 
 -- insert entradas

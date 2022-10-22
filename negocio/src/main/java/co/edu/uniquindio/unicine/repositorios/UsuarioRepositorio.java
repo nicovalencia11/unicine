@@ -1,6 +1,5 @@
 package co.edu.uniquindio.unicine.repositorios;
 
-import co.edu.uniquindio.unicine.entidades.Cliente;
 import co.edu.uniquindio.unicine.entidades.Usuario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -34,9 +33,8 @@ public interface UsuarioRepositorio extends JpaRepository<Usuario, Integer> {
     /**
      * Metodo que permite obtener el usuario dado un correo o
      * el nombre de usuario
-     * @param correo
      * @return
      */
-    @Query("select u from Usuario u where u.cliente.correo =:correo or u.nombreUsuario =:nombreUsuario")
-    Optional<Usuario> verificarCorreoNombreUsuario(String correo, String nombreUsuario);
+    @Query("select u from Usuario u where u.nombreUsuario =:nombreUsuario")
+    Optional<Usuario> verificarNombreUsuario(String nombreUsuario);
 }

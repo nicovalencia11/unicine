@@ -4,6 +4,7 @@ import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.enums.Estado;
 import co.edu.uniquindio.unicine.enums.Rol;
 import co.edu.uniquindio.unicine.servicios.implementacion.ClienteServicioImpl;
+import co.edu.uniquindio.unicine.servicios.implementacion.UsuarioServicioImpl;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,8 @@ public class ClienteTest {
 
     @Autowired
     private ClienteServicioImpl clienteServicio;
+    @Autowired
+    private UsuarioServicioImpl usuarioServicio;
 
     /**
      * Metodo de prueba para rgeistrar un cliente
@@ -29,8 +32,13 @@ public class ClienteTest {
     @Test
     @Sql("classpath:dataset.sql")
     public void registrarCliente() {
-        Usuario usuario = new Usuario("nicovalencia11","123456", Rol.Cliente);
-        Cliente cliente = new Cliente("1094970201","Nicolas Valencia","nicolasvalencibnmbnamadrid@gmail.com","RUTA", Estado.Inactivo, usuario);
+        Usuario usuario = new Usuario("nicovalencia13","123456", Rol.Cliente);
+        Cliente cliente = new Cliente("1094970202","Nicolas Valencia","nicolasvalencibnmbnaghjmadrid@gmail.com","RUTA", Estado.Inactivo, usuario);
+        try {
+            usuarioServicio.registrarUsuario(usuario);
+        } catch (Exception e) {
+            Assertions.assertTrue(false);
+        }
         try {
             Cliente almacenado = clienteServicio.registrarCliente(cliente);
             Assertions.assertNotNull(almacenado);

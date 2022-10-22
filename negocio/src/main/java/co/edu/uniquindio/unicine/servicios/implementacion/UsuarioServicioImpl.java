@@ -58,7 +58,7 @@ public class UsuarioServicioImpl implements UsuarioServicio {
      */
     @Override
     public Usuario registrarUsuario(Usuario usuario) throws Exception {
-        if(verificarCorreo(usuario.getCliente().getCorreo(),usuario.getNombreUsuario())){
+        if(verificarNombreUsuario(usuario.getNombreUsuario())){
             throw new Exception("El correo o nombre de usuario ya se encuentra registrado en el sistema");
         }
         return usuarioRepositorio.save(usuario);
@@ -111,11 +111,10 @@ public class UsuarioServicioImpl implements UsuarioServicio {
 
     /**
      * Metodo que permite verificar si un correo ya existe en la base de datos
-     * @param correo
      * @return
      */
-    private boolean verificarCorreo(String correo, String nombreUsuario) {
-        Usuario usuario = usuarioRepositorio.verificarCorreoNombreUsuario(correo, nombreUsuario).orElse(null);
+    private boolean verificarNombreUsuario(String nombreUsuario) {
+        Usuario usuario = usuarioRepositorio.verificarNombreUsuario(nombreUsuario).orElse(null);
         if(usuario == null){
             return false;
         }
