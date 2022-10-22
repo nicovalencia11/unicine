@@ -13,20 +13,12 @@ insert into cliente values (4,"12345","pepe@gmail.com", 1,"ruta","pepe",4);
 insert into cliente values (5,"123456","oscar@gmail.com", 1,"ruta","oscar",5);
 
 
---insert departamentos
-insert into departamento values (1, "Quindio");
-insert into departamento values (2, "Risaralda");
-insert into departamento values (3, "Caldas");
-insert into departamento values (4, "Valle del cauca");
-insert into departamento values (5, "Cundinamarca");
-
-
 --insert ciudades
-insert into ciudad values (1, "Armenia",1);
-insert into ciudad values (2, "Pereira",2);
-insert into ciudad values (3, "Manizales",3);
-insert into ciudad values (4, "Cali",4);
-insert into ciudad values (5, "Bogota",5);
+insert into ciudad values (1, "Armenia");
+insert into ciudad values (2, "Pereira");
+insert into ciudad values (3, "Manizales");
+insert into ciudad values (4, "Cali");
+insert into ciudad values (5, "Bogota");
 
 
 --insert teatros
@@ -46,11 +38,11 @@ insert into sala values (5, "SALA 5", "{}" ,1);
 
 
 -- insert peliculas
-insert into pelicula values (1, 2, "RUTAIMAGEN", "HARRY POTTER", "lorem lorem lorem ", "lorem lorem lorem ", "RUTATRAILER");
-insert into pelicula values (2, 2, "RUTAIMAGEN", "RAPIDOS Y FURIOSOS", "lorem lorem lorem ", "lorem lorem lorem ", "RUTATRAILER");
-insert into pelicula values (3, 2, "RUTAIMAGEN", "EL CONJURO", "lorem lorem lorem ", "lorem lorem lorem ", "RUTATRAILER");
-insert into pelicula values (4, 2, "RUTAIMAGEN", "LA MONJA", "lorem lorem lorem ", "lorem lorem lorem ", "RUTATRAILER");
-insert into pelicula values (5, 2, "RUTAIMAGEN", "LA CARRERA DE LA MUERTE", "lorem lorem lorem ", "lorem lorem lorem ", "RUTATRAILER");
+insert into pelicula values (1, 0, 0, 2, "RUTAIMAGEN", "HARRY POTTER", "lorem lorem lorem ", "lorem lorem lorem ", "RUTATRAILER");
+insert into pelicula values (2, 0, 0, 2, "RUTAIMAGEN", "RAPIDOS Y FURIOSOS", "lorem lorem lorem ", "lorem lorem lorem ", "RUTATRAILER");
+insert into pelicula values (3, 0, 0, 2, "RUTAIMAGEN", "EL CONJURO", "lorem lorem lorem ", "lorem lorem lorem ", "RUTATRAILER");
+insert into pelicula values (4, 0, 0, 2, "RUTAIMAGEN", "LA MONJA", "lorem lorem lorem ", "lorem lorem lorem ", "RUTATRAILER");
+insert into pelicula values (5, 0, 0, 2, "RUTAIMAGEN", "LA CARRERA DE LA MUERTE", "lorem lorem lorem ", "lorem lorem lorem ", "RUTATRAILER");
 
 
 -- insert generospeliduclas
@@ -102,11 +94,11 @@ insert into venta values (5, '2022-10-10 17:30:00', 1, 50000, 5, 5, 5);
 
 
 -- insert confiteria
-insert into confiteria values (1, "combo de cripetas pequeña con gaseosa pequeña", "RUTAIMAGEN", "COMBO 1", 25000);
-insert into confiteria values (2, "combo de cripetas pequña con gaseosa pequeña y perro", "RUTAIMAGEN", "COMBO 2", 29000);
-insert into confiteria values (3, "combo de perro con gaseosa pequeña", "RUTAIMAGEN", "COMBO 3", 20000);
-insert into confiteria values (4, "combo de cripetas mediana con gaseosa mediana", "RUTAIMAGEN", "COMBO 4", 35000);
-insert into confiteria values (5, "combo de cripetas grande con gaseosa grande", "RUTAIMAGEN", "COMBO 5", 40000);
+insert into confiteria values (1, 0, 0, "combo de cripetas pequeña con gaseosa pequeña", "RUTAIMAGEN", "COMBO 1", 25000);
+insert into confiteria values (2, 0, 0, "combo de cripetas pequña con gaseosa pequeña y perro", "RUTAIMAGEN", "COMBO 2", 29000);
+insert into confiteria values (3, 0, 0, "combo de perro con gaseosa pequeña", "RUTAIMAGEN", "COMBO 3", 20000);
+insert into confiteria values (4, 0, 0, "combo de cripetas mediana con gaseosa mediana", "RUTAIMAGEN", "COMBO 4", 35000);
+insert into confiteria values (5, 0, 0, "combo de cripetas grande con gaseosa grande", "RUTAIMAGEN", "COMBO 5", 40000);
 
 
 -- insert venta confiteria

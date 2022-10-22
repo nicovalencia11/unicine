@@ -38,6 +38,12 @@ public class Confiteria implements Serializable {
     @Column(nullable = false)
     private String descripcion;
 
+    @Column(nullable = false)
+    private Double calificacion;
+
+    @Column(nullable = false)
+    private Integer calificadores;
+
     @ToString.Exclude
     @OneToMany(mappedBy = "confiteria")
     private List<DetalleVentaConfiteria> detalleVentaConfiteria;

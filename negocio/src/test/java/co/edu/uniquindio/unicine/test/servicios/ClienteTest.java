@@ -2,7 +2,12 @@ package co.edu.uniquindio.unicine.test.servicios;
 
 import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.enums.Estado;
+import co.edu.uniquindio.unicine.enums.MedioPago;
 import co.edu.uniquindio.unicine.enums.Rol;
+import co.edu.uniquindio.unicine.repositorios.ConfiteriaRepositorio;
+import co.edu.uniquindio.unicine.repositorios.CuponRepositorio;
+import co.edu.uniquindio.unicine.repositorios.HorarioFuncionRepositorio;
+import co.edu.uniquindio.unicine.repositorios.PeliculaRepositorio;
 import co.edu.uniquindio.unicine.servicios.implementacion.ClienteServicioImpl;
 import co.edu.uniquindio.unicine.servicios.implementacion.UsuarioServicioImpl;
 import org.junit.jupiter.api.Assertions;
@@ -12,6 +17,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -25,6 +31,14 @@ public class ClienteTest {
     private ClienteServicioImpl clienteServicio;
     @Autowired
     private UsuarioServicioImpl usuarioServicio;
+    @Autowired
+    private HorarioFuncionRepositorio horarioFuncionRepositorio;
+    @Autowired
+    private CuponRepositorio cuponRepositorio;
+    @Autowired
+    private PeliculaRepositorio peliculaRepositorio;
+    @Autowired
+    private ConfiteriaRepositorio confiteriaRepositorio;
 
     /**
      * Metodo de prueba para rgeistrar un cliente
@@ -155,6 +169,108 @@ public class ClienteTest {
             Assertions.assertNotNull(funciones);
         } catch (Exception e) {
             Assertions.assertTrue(false);
+        }
+    }
+
+    /**
+     * Metodo de prueba para registrar una venta
+     */
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void registrarVenta() {
+        Cliente cliente = null;
+        HorarioFuncion horarioFuncion = null;
+        try {
+            cliente = clienteServicio.consultarCliente(1);
+            horarioFuncion = horarioFuncionRepositorio.findById(1).orElse(null);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        Venta venta = Venta
+                .builder()
+                .fecha(LocalDateTime.now())
+                .medioPago(MedioPago.Bancolombia)
+                .valorTotal(250000)
+                .cliente(cliente)
+                .horarioFuncion(horarioFuncion)
+                .build();
+        try {
+            Venta ventaAlmacenada = clienteServicio.registrarVenta(venta);
+            Assertions.assertNotNull(ventaAlmacenada);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Metodo de prueba para aplicar descuento de un cupon a una compra
+     */
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void aplicarDescuentoCupon() {
+        Cliente cliente = null;
+        HorarioFuncion horarioFuncion = null;
+        Cupon cupon = null;
+        try {
+            cliente = clienteServicio.consultarCliente(1);
+            horarioFuncion = horarioFuncionRepositorio.findById(1).orElse(null);
+            cupon = cuponRepositorio.findById(1).orElse(null);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        Venta venta = Venta
+                .builder()
+                .fecha(LocalDateTime.now())
+                .medioPago(MedioPago.Bancolombia)
+                .valorTotal(250000)
+                .cliente(cliente)
+                .horarioFuncion(horarioFuncion)
+                .build();
+        try {
+            Venta ventaDescuento = clienteServicio.aplicarDescuentoCupon(venta,cupon);
+            Assertions.assertNotNull(ventaDescuento);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Metodo de prueba para listar las ventas del cliente
+     */
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarVentas() {
+        List<Venta> ventas = clienteServicio.listarVentas(1);
+        Assertions.assertNotNull(ventas);
+    }
+
+    /**
+     * Metodo de prueba para calificar una pelicula
+     */
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void calificarPelicula() {
+        Pelicula pelicula = peliculaRepositorio.findById(1).orElse(null);
+        try {
+            Pelicula peliculaAlmacenada = clienteServicio.calificarPelicula(pelicula,5);
+            Assertions.assertNotNull(peliculaAlmacenada);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Metodo de prueba para calificar una confiteria
+     */
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void calificarConfiteria() {
+        Confiteria confiteria = confiteriaRepositorio.findById(1).orElse(null);
+        try {
+            Confiteria confiteriaAlmacenada = clienteServicio.calificarConfiteria(confiteria, 5);
+            Assertions.assertNotNull(confiteriaAlmacenada);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }

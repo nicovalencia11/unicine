@@ -87,7 +87,7 @@ public interface ClienteServicio {
      * @return
      * @throws Exception
      */
-    Venta aplicarDescuentoCupon(Cupon cupon) throws Exception;
+    Venta aplicarDescuentoCupon(Venta venta, Cupon cupon) throws Exception;
 
     /**
      * Metodo que permite listar las ventas dado el id de un cliente
@@ -95,4 +95,19 @@ public interface ClienteServicio {
      */
     List<Venta> listarVentas(Integer codigoCliente);
 
+    /**
+     * Metodo que permite calificar una pelicula por el cliente
+     * @param calificacion
+     * @return
+     * @throws Exception
+     */
+    Pelicula calificarPelicula(Pelicula pelicula, Integer calificacion) throws Exception;
+
+    /**
+     * Metodo que permite calificar una confiteria por el cliente
+     * @param calificacion
+     * @return
+     * @throws Exception
+     */
+    Confiteria calificarConfiteria(Confiteria confiteria, Integer calificacion) throws Exception;
 }
