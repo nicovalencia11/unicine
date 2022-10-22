@@ -161,18 +161,6 @@ public class ClienteServicioImpl implements ClienteServicio {
     }
 
     /**
-     * Metodo que permite actualizar una venta
-     *
-     * @param venta
-     * @return
-     * @throws Exception
-     */
-    @Override
-    public Venta actualizarVenta(Venta venta) throws Exception {
-        return null;
-    }
-
-    /**
      * Metodo que permite aplicar un cupon a la venta
      *
      * @param cupon

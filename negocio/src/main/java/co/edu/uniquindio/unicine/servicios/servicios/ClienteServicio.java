@@ -82,14 +82,6 @@ public interface ClienteServicio {
     Venta registrarVenta(Venta venta) throws Exception;
 
     /**
-     * Metodo que permite actualizar una venta
-     * @param venta
-     * @return
-     * @throws Exception
-     */
-    Venta actualizarVenta(Venta venta) throws Exception;
-
-    /**
      * Metodo que permite aplicar un cupon a la venta
      * @param cupon
      * @return

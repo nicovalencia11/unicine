@@ -1,9 +1,6 @@
 package co.edu.uniquindio.unicine.servicios.servicios;
 
-import co.edu.uniquindio.unicine.entidades.Ciudad;
-import co.edu.uniquindio.unicine.entidades.Confiteria;
-import co.edu.uniquindio.unicine.entidades.Cupon;
-import co.edu.uniquindio.unicine.entidades.Pelicula;
+import co.edu.uniquindio.unicine.entidades.*;
 
 import java.util.List;
 
@@ -160,5 +157,42 @@ public interface AdminServicio {
      * @throws Exception
      */
     Ciudad consultarCiudad(Integer codigoCiudad) throws Exception;
+
+    /**
+     * Metodo que permite registrar el empleado
+     * @param empleado
+     * @return
+     * @throws Exception
+     */
+    Empleado registrarEmpleado(Empleado empleado) throws Exception;
+
+    /**
+     * Metodo que permite acxtualizar el empleado
+     * @param empleado
+     * @return
+     * @throws Exception
+     */
+    Empleado actualizarEmpleado(Empleado empleado) throws Exception;
+
+    /**
+     * Metodo que permite eliminar un empleado
+     * @param codigoEmpleado
+     * @throws Exception
+     */
+    void eliminarEmpleado(Integer codigoEmpleado) throws Exception;
+
+    /**
+     * Metodo que permite listar los empleados
+     * @return
+     */
+    List<Empleado> listarEmpleados();
+
+    /**
+     * Metodo que permite  consultar un empleado dado su codigo
+     * @param codigoEmpleado
+     * @return
+     * @throws Exception
+     */
+    Empleado consultarEmpleado(Integer codigoEmpleado) throws Exception;
 
 }

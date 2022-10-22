@@ -1,9 +1,6 @@
 package co.edu.uniquindio.unicine.servicios.implementacion;
 
-import co.edu.uniquindio.unicine.entidades.Ciudad;
-import co.edu.uniquindio.unicine.entidades.Confiteria;
-import co.edu.uniquindio.unicine.entidades.Cupon;
-import co.edu.uniquindio.unicine.entidades.Pelicula;
+import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.servicios.servicios.AdminServicio;
 import org.springframework.stereotype.Service;
 
@@ -240,6 +237,63 @@ public class AdminServicioImpl implements AdminServicio {
      */
     @Override
     public Ciudad consultarCiudad(Integer codigoCiudad) throws Exception {
+        return null;
+    }
+
+    /**
+     * Metodo que permite registrar el empleado
+     *
+     * @param empleado
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Empleado registrarEmpleado(Empleado empleado) throws Exception {
+        return null;
+    }
+
+    /**
+     * Metodo que permite acxtualizar el empleado
+     *
+     * @param empleado
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Empleado actualizarEmpleado(Empleado empleado) throws Exception {
+        return null;
+    }
+
+    /**
+     * Metodo que permite eliminar un empleado
+     *
+     * @param codigoEmpleado
+     * @throws Exception
+     */
+    @Override
+    public void eliminarEmpleado(Integer codigoEmpleado) throws Exception {
+
+    }
+
+    /**
+     * Metodo que permite listar los empleados
+     *
+     * @return
+     */
+    @Override
+    public List<Empleado> listarEmpleados() {
+        return null;
+    }
+
+    /**
+     * Metodo que permite  consultar un empleado dado su codigo
+     *
+     * @param codigoEmpleado
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public Empleado consultarEmpleado(Integer codigoEmpleado) throws Exception {
         return null;
     }
 }
