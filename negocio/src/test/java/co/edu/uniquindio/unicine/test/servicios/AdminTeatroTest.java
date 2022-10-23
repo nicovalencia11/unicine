@@ -1,8 +1,6 @@
 package co.edu.uniquindio.unicine.test.servicios;
 
-import co.edu.uniquindio.unicine.entidades.Ciudad;
-import co.edu.uniquindio.unicine.entidades.Sala;
-import co.edu.uniquindio.unicine.entidades.Teatro;
+import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.repositorios.CiudadRepositorio;
 import co.edu.uniquindio.unicine.repositorios.TeatroRepositorio;
 import co.edu.uniquindio.unicine.servicios.implementacion.AdminTeatroServicioImpl;
@@ -13,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -180,6 +179,174 @@ public class AdminTeatroTest {
         try {
             sala = adminTeatroServicio.consultarSala(1);
             Assertions.assertNotNull(sala);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * metodo de prueba para registrar un horario
+     */
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void registrarHorario() {
+
+        HorarioFuncion horario = new HorarioFuncion(LocalDateTime.now(), "{}");
+        try {
+            horario = adminTeatroServicio.registrarHorario(horario);
+            Assertions.assertNotNull(horario);
+        } catch (Exception e) {
+            Assertions.assertTrue(true);
+        }
+    }
+
+    /**
+     * metodo de prueba para actualizar un horario
+     */
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void actualizarHorario()
+    {
+        HorarioFuncion horario = null;
+
+        try {
+            horario = adminTeatroServicio.consultarHorario(1);
+        } catch (Exception e) {
+            Assertions.assertTrue(false);
+        }
+
+        try {
+            horario.setDistribucionVentas("{1}");
+            HorarioFuncion almacenado = adminTeatroServicio.actualizarHorario(horario);
+            Assertions.assertNotNull(almacenado);
+        } catch (Exception e) {
+            Assertions.assertTrue(false);
+        }
+    }
+
+
+    /**
+     * metodo de prueba para eliminar un horario
+     */
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void eliminarHorario() {
+        try {
+            adminTeatroServicio.eliminarHorario(1);
+            Assertions.assertTrue(true);
+        } catch (Exception e) {
+            Assertions.assertTrue(false);
+        }
+    }
+
+    /**
+     * metodo de prueba para listar horarios
+     */
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarHorarios()
+    {
+        List<HorarioFuncion> horarios = adminTeatroServicio.listarHorarios();
+        Assertions.assertTrue(true);
+    }
+
+    /**
+     * metodo de prueba para consulta horario
+     */
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void consultarHorario() {
+        HorarioFuncion horario = null;
+        try {
+            horario = adminTeatroServicio.consultarHorario(1);
+            Assertions.assertNotNull(horario);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * metodo de prueba para registrar una funcion
+     */
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void registrarFuncion() {
+
+        Funcion funcion = new Funcion(5.500);
+        try {
+            funcion = adminTeatroServicio.registrarFuncion(funcion);
+            Assertions.assertNotNull(funcion);
+        } catch (Exception e) {
+            Assertions.assertTrue(true);
+        }
+    }
+
+    /**
+     * metodo de prueba para actualizar un horario
+     */
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void actualizarFuncion()
+    {
+        Funcion funcion = null;
+
+        try {
+            funcion = adminTeatroServicio.consultarFuncion(1);
+        } catch (Exception e) {
+            Assertions.assertTrue(false);
+        }
+
+        try {
+            funcion.setValor(6.000);
+            Funcion almacenado = adminTeatroServicio.actualizarFuncion(funcion);
+            Assertions.assertNotNull(almacenado);
+        } catch (Exception e) {
+            Assertions.assertTrue(false);
+        }
+    }
+
+    /**
+     * metodo de prueba para eliminar una funcion
+     */
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void eliminarFuncion() {
+        try {
+            adminTeatroServicio.eliminarFuncion(1);
+            Assertions.assertTrue(true);
+        } catch (Exception e) {
+            Assertions.assertTrue(false);
+        }
+    }
+
+    /**
+     * metodo de prueba para listar funciones
+     */
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarFunciones()
+    {
+        List<Funcion> funciones = adminTeatroServicio.listarFunciones();
+        Assertions.assertTrue(true);
+    }
+
+
+    /**
+     * metodo de prueba para consulta una funcion
+     */
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void consultarFuncion() {
+        Funcion funcion = null;
+        try {
+            funcion = adminTeatroServicio.consultarFuncion(1);
+            Assertions.assertNotNull(funcion);
         } catch (Exception e) {
             throw new RuntimeException(e);
         }

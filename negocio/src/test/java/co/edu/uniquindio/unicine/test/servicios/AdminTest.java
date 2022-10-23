@@ -30,6 +30,9 @@ public class AdminTest {
     @Autowired
     private ClienteServicioImpl clienteServicio;
 
+    /**
+     * metodo de prueba para registrar una pelicula
+     */
     @Test
     @Sql("classpath:dataset.sql")
     public void registrarPelicula()
@@ -46,6 +49,10 @@ public class AdminTest {
             Assertions.assertTrue(true);
         }
     }
+
+    /**
+     * metodo de prueba para actualizar una pelicula
+     */
 
     @Test
     @Sql("classpath:dataset.sql")
@@ -68,6 +75,11 @@ public class AdminTest {
         }
     }
 
+
+    /**
+     * metodo de prueba para eliminar una pelicula
+     */
+
     @Test
     @Sql("classpath:dataset.sql")
     public void eliminarPelicula() {
@@ -79,6 +91,10 @@ public class AdminTest {
         }
     }
 
+    /**
+     * metodo de prueba para listar peliculas
+     */
+
     @Test
     @Sql("classpath:dataset.sql")
     public void listarPeliculas()
@@ -86,6 +102,11 @@ public class AdminTest {
         List<Pelicula> peliculas = adminServicio.listarPeliculas();
         Assertions.assertTrue(true);
     }
+
+
+    /**
+     * metodo de prueba para consultar una pelicula
+     */
 
     @Test
     @Sql("classpath:dataset.sql")
@@ -97,6 +118,10 @@ public class AdminTest {
             Assertions.assertTrue(false);
         }
     }
+
+    /**
+     * metodo de prueba para registrar una confiteria
+     */
 
     @Test
     @Sql("classpath:dataset.sql")
@@ -110,6 +135,10 @@ public class AdminTest {
             Assertions.assertTrue(true);
         }
     }
+
+    /**
+     * metodo de prueba para actualizar una confiteria
+     */
 
     @Test
     @Sql("classpath:dataset.sql")
@@ -132,6 +161,10 @@ public class AdminTest {
         }
     }
 
+    /**
+     * metodo de prueba para eliminar una confiteria
+     */
+
     @Test
     @Sql("classpath:dataset.sql")
     public void eliminarConfiteria() {
@@ -143,6 +176,10 @@ public class AdminTest {
         }
     }
 
+    /**
+     * metodo de prueba para listar una confiteria
+     */
+
     @Test
     @Sql("classpath:dataset.sql")
     public void listarConfiteria()
@@ -150,6 +187,10 @@ public class AdminTest {
         List<Confiteria> confiterias = adminServicio.listarConfiterias();
         Assertions.assertTrue(true);
     }
+
+    /**
+     * metodo de prueba para consultar una confiteria
+     */
 
     @Test
     @Sql("classpath:dataset.sql")
@@ -161,6 +202,10 @@ public class AdminTest {
             Assertions.assertTrue(false);
         }
     }
+
+    /**
+     * metodo de prueba para registrar un cupon
+     */
 
     @Test
     @Sql("classpath:dataset.sql")
@@ -176,6 +221,10 @@ public class AdminTest {
             Assertions.assertTrue(true);
         }
     }
+
+    /**
+     * metodo de prueba para actualizar un cupon
+     */
 
     @Test
     @Sql("classpath:dataset.sql")
@@ -198,6 +247,10 @@ public class AdminTest {
         }
     }
 
+    /**
+     * metodo de prueba para eliminar un cupon
+     */
+
     @Test
     @Sql("classpath:dataset.sql")
     public void eliminaCupon() {
@@ -209,6 +262,10 @@ public class AdminTest {
         }
     }
 
+    /**
+     * metodo de prueba para listar cupones
+     */
+
     @Test
     @Sql("classpath:dataset.sql")
     public void listarCupones()
@@ -216,6 +273,10 @@ public class AdminTest {
         List<Cupon> cupones = adminServicio.listarCupones();
         Assertions.assertTrue(true);
     }
+
+    /**
+     * metodo de prueba para consultar un cupon
+     */
 
     @Test
     @Sql("classpath:dataset.sql")
@@ -228,6 +289,9 @@ public class AdminTest {
         }
     }
 
+    /**
+     * metodo de prueba para registrar una ciudad
+     */
 
     @Test
     @Sql("classpath:dataset.sql")
@@ -241,6 +305,10 @@ public class AdminTest {
             Assertions.assertTrue(true);
         }
     }
+
+    /**
+     * metodo de prueba para actualizar una ciudad
+     */
 
     @Test
     @Sql("classpath:dataset.sql")
@@ -263,6 +331,10 @@ public class AdminTest {
         }
     }
 
+    /**
+     * metodo de prueba para eliminar una ciudad
+     */
+
     @Test
     @Sql("classpath:dataset.sql")
     public void eliminarCiudad() {
@@ -274,6 +346,10 @@ public class AdminTest {
         }
     }
 
+    /**
+     * metodo de prueba para listar ciudades
+     */
+
     @Test
     @Sql("classpath:dataset.sql")
     public void listarCiudades()
@@ -281,6 +357,10 @@ public class AdminTest {
         List<Ciudad> ciudades = adminServicio.listarCiudades();
         Assertions.assertTrue(true);
     }
+
+    /**
+     * metodo de prueba para consultar una ciudad
+     */
 
     @Test
     @Sql("classpath:dataset.sql")
@@ -293,6 +373,9 @@ public class AdminTest {
         }
     }
 
+    /**
+     * metodo de prueba para registrar un empleado
+     */
     @Test
     @Sql("classpath:dataset.sql")
     public void registrarEmpleado() throws Exception {
@@ -306,6 +389,10 @@ public class AdminTest {
             Assertions.assertTrue(true);
         }
     }
+
+    /**
+     * metodo de prueba para actualizar un empleado
+     */
 
     @Test
     @Sql("classpath:dataset.sql")
@@ -328,6 +415,10 @@ public class AdminTest {
         }
     }
 
+    /**
+     * metodo de prueba para eliminar un empleado
+     */
+
     @Test
     @Sql("classpath:dataset.sql")
     public void eliminarEmpleado() {
@@ -339,6 +430,10 @@ public class AdminTest {
         }
     }
 
+    /**
+     * metodo de prueba para listar empleados
+     */
+
     @Test
     @Sql("classpath:dataset.sql")
     public void listarEmpleados()
@@ -346,6 +441,10 @@ public class AdminTest {
         List<Empleado> empleados = adminServicio.listarEmpleados();
         Assertions.assertTrue(true);
     }
+
+    /**
+     * metodo de prueba para consultar un empleado
+     */
 
     @Test
     @Sql("classpath:dataset.sql")

@@ -432,7 +432,7 @@ public class AdminServicioImpl implements AdminServicio {
 
         Empleado empleadoGuardado = empleadoRepositorio.findById(codigoEmpleado).orElse(null);
         if (empleadoGuardado == null){
-            throw new Exception("El no empleado existe en el sistema");
+            throw new Exception("El empleado no existe en el sistema");
         }
     }
 

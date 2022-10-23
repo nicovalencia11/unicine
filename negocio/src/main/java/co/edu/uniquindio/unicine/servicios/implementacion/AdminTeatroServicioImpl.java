@@ -1,9 +1,7 @@
 package co.edu.uniquindio.unicine.servicios.implementacion;
 
 import co.edu.uniquindio.unicine.entidades.*;
-import co.edu.uniquindio.unicine.repositorios.CiudadRepositorio;
-import co.edu.uniquindio.unicine.repositorios.SalaRepositorio;
-import co.edu.uniquindio.unicine.repositorios.TeatroRepositorio;
+import co.edu.uniquindio.unicine.repositorios.*;
 import co.edu.uniquindio.unicine.servicios.servicios.AdminTeatroServicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +20,12 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio {
     private TeatroRepositorio teatroRepositorio;
     @Autowired
     private SalaRepositorio salaRepositorio;
+
+    @Autowired
+    private HorarioFuncionRepositorio horarioFuncionRepositorio;
+
+    @Autowired
+    private FuncionRepositorio funcionRepositorio;
 
 
 
@@ -95,7 +99,8 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio {
      */
     @Override
     public Funcion registrarFuncion(Funcion funcion) throws Exception {
-        return null;
+        verificarCodigoFuncion(funcion.getCodigo());
+        return funcionRepositorio.save(funcion);
     }
 
     /**
@@ -107,7 +112,8 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio {
      */
     @Override
     public Funcion actualizarFuncion(Funcion funcion) throws Exception {
-        return null;
+        verificarCodigoFuncion(funcion.getCodigo());
+        return funcionRepositorio.save(funcion);
     }
 
     /**
@@ -118,7 +124,8 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio {
      */
     @Override
     public void eliminarFuncion(Integer codigoFuncion) throws Exception {
-
+        verificarCodigoFuncion(codigoFuncion);
+        funcionRepositorio.deleteById(codigoFuncion);
     }
 
     /**
@@ -128,7 +135,7 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio {
      */
     @Override
     public List<Funcion> listarFunciones() {
-        return null;
+        return funcionRepositorio.findAll();
     }
 
     /**
@@ -140,7 +147,21 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio {
      */
     @Override
     public Funcion consultarFuncion(Integer codigoFuncion) throws Exception {
-        return null;
+        verificarCodigoFuncion(codigoFuncion);
+        return funcionRepositorio.findById(codigoFuncion).orElse(null);
+    }
+
+    /**
+     * * Metodo que permite verificar si una funcion existe dado su id
+     * @param codigoFuncion
+     *  @throws Exception
+     */
+    private void verificarCodigoFuncion(Integer codigoFuncion) throws Exception {
+
+        Funcion funcionGuardado = funcionRepositorio.findById(codigoFuncion).orElse(null);
+        if (funcionGuardado == null){
+            throw new Exception("La función no existe en el sistema");
+        }
     }
 
     /**
@@ -213,7 +234,8 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio {
      */
     @Override
     public HorarioFuncion registrarHorario(HorarioFuncion horarioFuncion) throws Exception {
-        return null;
+        verificarCodigoHorario(horarioFuncion.getCodigo());
+        return horarioFuncionRepositorio.save(horarioFuncion);
     }
 
     /**
@@ -225,7 +247,8 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio {
      */
     @Override
     public HorarioFuncion actualizarHorario(HorarioFuncion horarioFuncion) throws Exception {
-        return null;
+        verificarCodigoHorario(horarioFuncion.getCodigo());
+        return horarioFuncionRepositorio.save(horarioFuncion);
     }
 
     /**
@@ -236,7 +259,8 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio {
      */
     @Override
     public void eliminarHorario(Integer codigoHorarioFuncion) throws Exception {
-
+        HorarioFuncion horario = consultarHorario(codigoHorarioFuncion);
+        horarioFuncionRepositorio.delete(horario);
     }
 
     /**
@@ -246,7 +270,7 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio {
      */
     @Override
     public List<HorarioFuncion> listarHorarios() {
-        return null;
+        return horarioFuncionRepositorio.findAll();
     }
 
     /**
@@ -258,7 +282,21 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio {
      */
     @Override
     public HorarioFuncion consultarHorario(Integer codigoHorarioFuncion) throws Exception {
-        return null;
+        verificarCodigoHorario(codigoHorarioFuncion);
+        return horarioFuncionRepositorio.findById(codigoHorarioFuncion).orElse(null);
+    }
+
+    /**
+     * * Metodo que permite verificar si un horario existe dado su id
+     * @param codigoHorarioFuncion
+     *  @throws Exception
+     */
+    private void verificarCodigoHorario(Integer codigoHorarioFuncion) throws Exception {
+
+        HorarioFuncion horarioGuardado = horarioFuncionRepositorio.findById(codigoHorarioFuncion).orElse(null);
+        if (horarioGuardado == null){
+            throw new Exception("El horario no existe en el sistema");
+        }
     }
 
     /**
