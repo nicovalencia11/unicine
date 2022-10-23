@@ -1,10 +1,11 @@
 package co.edu.uniquindio.unicine.servicios.implementacion;
 
-import co.edu.uniquindio.unicine.entidades.Funcion;
-import co.edu.uniquindio.unicine.entidades.HorarioFuncion;
-import co.edu.uniquindio.unicine.entidades.Sala;
-import co.edu.uniquindio.unicine.entidades.Teatro;
+import co.edu.uniquindio.unicine.entidades.*;
+import co.edu.uniquindio.unicine.repositorios.CiudadRepositorio;
+import co.edu.uniquindio.unicine.repositorios.SalaRepositorio;
+import co.edu.uniquindio.unicine.repositorios.TeatroRepositorio;
 import co.edu.uniquindio.unicine.servicios.servicios.AdminTeatroServicio;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,6 +16,15 @@ import java.util.List;
 @Service
 public class AdminTeatroServicioImpl implements AdminTeatroServicio {
 
+    @Autowired
+    private CiudadRepositorio ciudadRepositorio;
+    @Autowired
+    private TeatroRepositorio teatroRepositorio;
+    @Autowired
+    private SalaRepositorio salaRepositorio;
+
+
+
     /**
      * Metodo que permite registrar el teatro
      *
@@ -24,7 +34,8 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio {
      */
     @Override
     public Teatro registrarTeatro(Teatro teatro) throws Exception {
-        return null;
+        validarInformacionTeatro(teatro);
+        return teatroRepositorio.save(teatro);
     }
 
     /**
@@ -36,7 +47,8 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio {
      */
     @Override
     public Teatro actualizarTeatro(Teatro teatro) throws Exception {
-        return null;
+        verificarCodigoTeatro(teatro.getCodigo());
+        return teatroRepositorio.save(teatro);
     }
 
     /**
@@ -47,7 +59,8 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio {
      */
     @Override
     public void eliminarTeatro(Integer codigoTeatro) throws Exception {
-
+        verificarCodigoTeatro(codigoTeatro);
+        teatroRepositorio.deleteById(codigoTeatro);
     }
 
     /**
@@ -57,7 +70,7 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio {
      */
     @Override
     public List<Teatro> listarTeatros() {
-        return null;
+        return teatroRepositorio.findAll();
     }
 
     /**
@@ -69,7 +82,8 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio {
      */
     @Override
     public Teatro consultarTeatro(Integer codigoTeatro) throws Exception {
-        return null;
+        verificarCodigoTeatro(codigoTeatro);
+        return teatroRepositorio.findById(codigoTeatro).orElse(null);
     }
 
     /**
@@ -138,7 +152,8 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio {
      */
     @Override
     public Sala registrarSala(Sala sala) throws Exception {
-        return null;
+        validarInformacionSala(sala);
+        return salaRepositorio.save(sala);
     }
 
     /**
@@ -150,7 +165,8 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio {
      */
     @Override
     public Sala actualizarSala(Sala sala) throws Exception {
-        return null;
+        verificarCodigoSala(sala.getCodigo());
+        return salaRepositorio.save(sala);
     }
 
     /**
@@ -161,7 +177,8 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio {
      */
     @Override
     public void eliminarSala(Integer codigoSala) throws Exception {
-
+        verificarCodigoSala(codigoSala);
+        salaRepositorio.deleteById(codigoSala);
     }
 
     /**
@@ -171,7 +188,7 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio {
      */
     @Override
     public List<Sala> listarSalas() {
-        return null;
+        return salaRepositorio.findAll();
     }
 
     /**
@@ -183,7 +200,8 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio {
      */
     @Override
     public Sala consultarSala(Integer codigoSala) throws Exception {
-        return null;
+        verificarCodigoSala(codigoSala);
+        return salaRepositorio.findById(codigoSala).orElse(null);
     }
 
     /**
@@ -241,5 +259,65 @@ public class AdminTeatroServicioImpl implements AdminTeatroServicio {
     @Override
     public HorarioFuncion consultarHorario(Integer codigoHorarioFuncion) throws Exception {
         return null;
+    }
+
+    /**
+     * Metodo que permite validar la informacion de un teatro
+     * @param teatro
+     * @throws Exception
+     */
+    private void validarInformacionTeatro(Teatro teatro) throws Exception {
+        if(teatro.getNombre() == null){
+            throw new Exception("El campo nombre es obligatorio");
+        } else if(teatro.getDireccion() == null) {
+            throw new Exception("El campo direccion es obligatorio");
+        } else if(teatro.getTelefono() == null) {
+            throw new Exception("El campo telefono es obligatorio");
+        }
+        Ciudad ciudad = ciudadRepositorio.findById(teatro.getCiudad().getCodigo()).orElse(null);
+        if(ciudad == null) {
+            throw new Exception("La ciudad debe ser una ciudad valida");
+        }
+    }
+
+    /**
+     * Metodo que permite verificar el codigo de un teatro
+     * @param codigoTeatro
+     * @throws Exception
+     */
+    private void verificarCodigoTeatro(Integer codigoTeatro) throws Exception {
+        Teatro teatroAlmacenado = teatroRepositorio.findById(codigoTeatro).orElse(null);
+        if (teatroAlmacenado == null) {
+            throw new Exception("El teatro no existe en el sistema");
+        }
+    }
+
+    /**
+     * Metodo que permite verificar la informacion de una sala
+     * @param sala
+     * @throws Exception
+     */
+    private void validarInformacionSala(Sala sala) throws Exception {
+        if (sala.getDescripcion() == null) {
+            throw new Exception("El campo descripcion es obligatorio");
+        } else if (sala.getDistribucion() == null) {
+            throw new Exception("El campo distribucion es obligatorio");
+        }
+        Teatro teatro = teatroRepositorio.findById(sala.getTeatro().getCodigo()).orElse(null);
+        if (teatro == null){
+            throw new Exception("El teatro es obligatorio");
+        }
+    }
+
+    /**
+     * Metodo para verificar el codigo de la sala
+     * @param codigoSala
+     * @throws Exception
+     */
+    private void verificarCodigoSala (Integer codigoSala) throws Exception {
+        Sala salaAlmacenada = salaRepositorio.findById(codigoSala).orElse(null);
+        if (salaAlmacenada == null){
+            throw new Exception("la sala no existe en el sistema");
+        }
     }
 }
