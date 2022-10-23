@@ -4,6 +4,11 @@ insert into usuario values (2,"juan","juan123",1);
 insert into usuario values (3,"camilo","cami123",1);
 insert into usuario values (4,"pepe","pepe123",1);
 insert into usuario values (5,"oscar","oscar123",1);
+insert into usuario values (6, "esteban", "esteban123", 2);
+insert into usuario values (7, "daniel", "daniel123", 2);
+insert into usuario values (8, "sandra", "sandra123", 2);
+insert into usuario values (9, "martha", "martha123", 2);
+
 
 --insert clientes
 insert into cliente values (1,"1094970200","nicolasvalenciamadrid@gmail.com", 1,"ruta","Nicolas valencia madrid",1);
@@ -11,6 +16,14 @@ insert into cliente values (2,"123","juan@gmail.com", 1,"ruta","juan",2);
 insert into cliente values (3,"1234","camilo@gmail.com", 1,"ruta","camilo",3);
 insert into cliente values (4,"12345","pepe@gmail.com", 1,"ruta","pepe",4);
 insert into cliente values (5,"123456","oscar@gmail.com", 1,"ruta","oscar",5);
+
+-- insert empleados
+insert into empleado values (1, "101011857", "estola2010@hotmail.com", "Esteban", 6);
+insert into empleado values (2, "113445577", "correoprueba1@gmail.com", "Daniel", 7);
+insert into empleado values (3, "55555", "correoprueba2@gmail.com", "Sandra", 8);
+insert into empleado values (4, "54544646", "correpureba3@gmail.com", "Martha", 9);
+
+
 
 
 --insert ciudades

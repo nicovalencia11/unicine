@@ -26,6 +26,9 @@ public class AdminServicioImpl implements AdminServicio {
     @Autowired
     private CiudadRepositorio ciudadRepositorio;
 
+    @Autowired
+    private EmpleadoRepositorio empleadoRepositorio;
+
     /**
      * Metodo que permite registrar una pelicula
      *
@@ -44,6 +47,7 @@ public class AdminServicioImpl implements AdminServicio {
         }
         return peliculaRepositorio.save(pelicula);
     }
+
 
     /**
      * Metodo que permite actualizar una pelicula
@@ -312,7 +316,6 @@ public class AdminServicioImpl implements AdminServicio {
     public void eliminarCiudad(Integer codigoCiudad) throws Exception {
         Ciudad ciudad = consultarCiudad(codigoCiudad);
         ciudadRepositorio.delete(ciudad);
-
     }
 
     /**
@@ -362,7 +365,14 @@ public class AdminServicioImpl implements AdminServicio {
      */
     @Override
     public Empleado registrarEmpleado(Empleado empleado) throws Exception {
-        return null;
+        Empleado empleadoBuscado = consultarEmpleado(empleado.getCodigo());
+
+        if(empleadoBuscado != null)
+        {
+            throw new Exception("El empleado ya está registrado en el sistema");
+
+        }
+        return empleadoRepositorio.save(empleado);
     }
 
     /**
@@ -374,7 +384,8 @@ public class AdminServicioImpl implements AdminServicio {
      */
     @Override
     public Empleado actualizarEmpleado(Empleado empleado) throws Exception {
-        return null;
+        verificarCodigoEmpleado(empleado.getCodigo());
+        return empleadoRepositorio.save(empleado);
     }
 
     /**
@@ -385,7 +396,8 @@ public class AdminServicioImpl implements AdminServicio {
      */
     @Override
     public void eliminarEmpleado(Integer codigoEmpleado) throws Exception {
-
+        Empleado empleado = consultarEmpleado(codigoEmpleado);
+        empleadoRepositorio.delete(empleado);
     }
 
     /**
@@ -395,7 +407,7 @@ public class AdminServicioImpl implements AdminServicio {
      */
     @Override
     public List<Empleado> listarEmpleados() {
-        return null;
+        return empleadoRepositorio.findAll();
     }
 
     /**
@@ -407,6 +419,21 @@ public class AdminServicioImpl implements AdminServicio {
      */
     @Override
     public Empleado consultarEmpleado(Integer codigoEmpleado) throws Exception {
-        return null;
+        verificarCodigoEmpleado(codigoEmpleado);
+        return empleadoRepositorio.findById(codigoEmpleado).orElse(null);
     }
+
+    /**
+     * * Metodo que permite verificar si un empleado existe dado su id
+     * @param codigoEmpleado
+     *  @throws Exception
+     */
+    private void verificarCodigoEmpleado(Integer codigoEmpleado) throws Exception {
+
+        Empleado empleadoGuardado = empleadoRepositorio.findById(codigoEmpleado).orElse(null);
+        if (empleadoGuardado == null){
+            throw new Exception("El no empleado existe en el sistema");
+        }
+    }
+
 }

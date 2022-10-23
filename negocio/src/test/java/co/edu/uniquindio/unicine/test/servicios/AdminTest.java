@@ -3,6 +3,7 @@ package co.edu.uniquindio.unicine.test.servicios;
 import co.edu.uniquindio.unicine.entidades.*;
 import co.edu.uniquindio.unicine.enums.Estado;
 import co.edu.uniquindio.unicine.enums.Genero;
+import co.edu.uniquindio.unicine.enums.Rol;
 import co.edu.uniquindio.unicine.servicios.implementacion.AdminServicioImpl;
 import co.edu.uniquindio.unicine.servicios.implementacion.ClienteServicioImpl;
 import org.junit.jupiter.api.Assertions;
@@ -292,8 +293,69 @@ public class AdminTest {
         }
     }
 
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void registrarEmpleado() throws Exception {
 
+        Usuario usuario = new Usuario("ana", "ana123", Rol.AdministradorTeatro);
+        Empleado empleado = new Empleado("Ana", "1234", "ana123@correo.com", usuario);
+        try {
+            Empleado empleadoRegistrado = adminServicio.registrarEmpleado(empleado);
+            Assertions.assertNotNull(empleadoRegistrado);
+        } catch (Exception e) {
+            Assertions.assertTrue(true);
+        }
+    }
 
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void actualizarEmpleado()
+    {
+        Empleado empleado = null;
 
+        try {
+            empleado = adminServicio.consultarEmpleado(1);
+        } catch (Exception e) {
+            Assertions.assertTrue(false);
+        }
+
+        try {
+            empleado.setNombre("Estebann");
+            Empleado almacenado = adminServicio.actualizarEmpleado(empleado);
+            Assertions.assertNotNull(almacenado);
+        } catch (Exception e) {
+            Assertions.assertTrue(false);
+        }
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void eliminarEmpleado() {
+        try {
+            adminServicio.eliminarEmpleado(1);
+            Assertions.assertTrue(true);
+        } catch (Exception e) {
+            Assertions.assertTrue(false);
+        }
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void listarEmpleados()
+    {
+        List<Empleado> empleados = adminServicio.listarEmpleados();
+        Assertions.assertTrue(true);
+    }
+
+    @Test
+    @Sql("classpath:dataset.sql")
+    public void consultarEmpleado() {
+        try {
+            Empleado empleado = adminServicio.consultarEmpleado(1);
+            Assertions.assertNotNull(empleado);
+        } catch (Exception e) {
+            Assertions.assertTrue(false);
+        }
+    }
 
 }
