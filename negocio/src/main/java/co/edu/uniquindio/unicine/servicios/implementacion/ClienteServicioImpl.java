@@ -46,6 +46,8 @@ public class ClienteServicioImpl implements ClienteServicio {
         if(verificarCorreoCedula(cliente.getCorreo(), cliente.getCedula())){
             throw new Exception("El correo o la cedula ya se encuentran registrados");
         }
+
+        cliente.setEstado(Estado.Inactivo);
         return clienteRepositorio.save(cliente);
     }
 
