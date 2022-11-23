@@ -7,6 +7,38 @@
       xmlns:p="http://primefaces.org/ui"
       xmlns:f="http://xmlns.jcp.org/jsf/core">
 <ui:composition template="/template/template.xhtml">
+    <ui:define name="contenido">
 
+        <div class="cuerpo_pagina">
+            <div class="container">
+                <div class="cartelera">
+                    <h2 class="mt-5 mb-5 text-center">CARTELERA</h2>
+                    <div class="row">
+                        <p:repeat value="#{inicioBean.peliculasCartelera}" var="pelicula">
+                            <div class="col-md-6">
+                                <a href="detalle_pelicula.xhtml?pelicula_id=#{pelicula.codigo}"
+                                   class="text-decoration-none">
+                                    <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative item_pelicula">
+                                        <div class="col p-4 d-flex flex-column position-static">
+                                            <div class="d-inline-block mb-2">
+                                                <p:repeat value="#{pelicula.generos}" var="genero">
+                                                    <p:chip label="#{genero}" styleClass="me-2 chip-genero"/>
+                                                </p:repeat>
+                                            </div>
+                                            <h3 class="mb-0">#{pelicula.nombre}</h3>
+                                            <p class="card-text mb-auto">#{pelicula.sipnosis}</p>
+                                        </div>
+                                        <div class="col-auto d-none d-lg-block imagen-pelicula">
+                                            <img src="#{pelicula.imagen}" alt="#{pelicula.nombre}"/>
+                                        </div>
+                                    </div>
+                                </a>
+                            </div>
+                        </p:repeat>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ui:define>
 </ui:composition>
 </html>
