@@ -1,15 +1,12 @@
 package co.edu.uniquindio.unicine.bean;
 
 import co.edu.uniquindio.unicine.entidades.Cliente;
-import co.edu.uniquindio.unicine.servicios.ClienteServicio;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import java.io.Serializable;
 
@@ -24,14 +21,14 @@ public class ClienteBean implements Serializable {
     private String confirmarContrasenia;
 
     @Autowired
-    private ClienteServicio clienteServicio;
+    //private ClienteServicio clienteServicio;
 
     @PostConstruct
     public void inicializarClase() {
         cliente = new Cliente();
     }
 
-    public void registrarCliente() {
+    /**public void registrarCliente() {
         try {
             if(cliente.getContrasenia().equals(confirmarContrasenia)){
                 clienteServicio.registrarCliente(cliente);
@@ -47,6 +44,6 @@ public class ClienteBean implements Serializable {
             FacesMessage fm = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Notificación", e.getMessage());
             FacesContext.getCurrentInstance().addMessage("mensaje_bean", fm);
         }
-    }
+    }*/
 
 }
