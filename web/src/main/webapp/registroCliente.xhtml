@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/template/template.xhtml" >
+    <ui:define name="contenido">
+        <div class="container">
+            <div class="row mt-4 mb-4" >
+                <p:panel header="Registro de clientes">
+                    <h:form>
+                        <h:panelGrid columns="3" cellpadding="5" styleClass="align-items-center">
+
+                            <p:outputLabel for="cedula_cliente" value="Cédula: " />
+                            <p:inputText id="cedula_cliente" value="#{clienteBean.cliente.cedula}" required="true" size="60" />
+                            <p:message for="cedula_cliente"/>
+
+                            <p:outputLabel for="nombre_cliente" value="Nombre completo: " />
+                            <p:inputText id="nombre_cliente" value="#{clienteBean.cliente.nombreCompleto}" required="true" size="60" />
+                            <p:message for="nombre_cliente"/>
+
+                            <p:outputLabel for="contrasenia_cliente" value="Contraseña: " />
+                            <p:password id="contrasenia_cliente" value="#{clienteBean.cliente.contrasenia}" required="true" size="60" />
+                            <p:message for="contrasenia_cliente"/>
+
+                            <p:outputLabel for="conf_contrasenia_cliente" value="Confirmar contraseña: " />
+                            <p:password id="conf_contrasenia_cliente" value="#{clienteBean.confirmarContrasenia}" required="true" size="60" />
+                            <p:message for="conf_contrasenia_cliente"/>
+
+                            <p:outputLabel for="email_cliente" value="Email: " />
+                            <p:inputText id="email_cliente" value="#{clienteBean.cliente.email}" required="true" size="60" />
+                            <p:message for="email_cliente"/>
+
+                            <p:outputLabel for="direccion_cliente" value="Direccion: " />
+                            <p:inputText id="direccion_cliente" value="#{clienteBean.cliente.direccion}" required="true" size="60" />
+                            <p:message for="direccion_cliente"/>
+
+                            <p:outputLabel for="edad_cliente" value="Edad: " />
+                            <p:inputText id="edad_cliente" value="#{clienteBean.cliente.edad}" required="true" size="60" />
+                            <p:message for="edad_cliente"/>
+
+                        </h:panelGrid>
+
+                        <p:commandButton action="#{clienteBean.registrarCliente()}" value="Registrarse" update="@form" />
+                        <p:growl for="mensaje_bean" showDetail="true" />
+                    </h:form>
+                </p:panel>
+            </div>
+        </div>
+    </ui:define>
+</ui:composition>
+
+</html>

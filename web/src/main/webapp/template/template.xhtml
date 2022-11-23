@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <h:outputStylesheet name="bootstrap.min.css" library="css"/>
+    <h:outputScript name="bootstrap.bundle.min.js" library="js"/>
+    <h:outputStylesheet name="styles.css" library="css"/>
+    <h:outputStylesheet name="carousel.css" library="css"/>
+    <title>Unicine - <ui:insert name="title">Inicio</ui:insert></title>
+</h:head>
+
+<h:body>
+    <div jsf:id="barra_nav">
+        <header class="p-4 text-bg-light">
+            <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                    <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                        <h:graphicImage library="img" name="nicine.png" styleClass="img_icon me-2"/>
+                    </a>
+                    <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                        <li><a href="#" class="nav-link px-2 text-black">En Cartelera</a></li>
+                        <li><a href="#" class="nav-link px-2 text-black">Próximamente</a></li>
+                        <li><a href="#" class="nav-link px-2 text-black">Confitería</a></li>
+                    </ul>
+
+                    <div class="text-end">
+                        <h:form rendered="#{!seguridadBean.autenticado}">
+                            <p:commandButton value="Login" oncomplete="PF('login').show()" styleClass="ui-button-outlined ui-badge-primary me-2" />
+                            <p:linkButton value="Registrarse" href="/registroCliente.xhtml" styleClass="sin-linea"/>
+                        </h:form>
+
+                        <h:form rendered="#{seguridadBean.autenticado}" >
+                            <p:linkButton value="Mi perfil" icon="pi pi-user" styleClass="me-3 sin-linea" href="/cliente/mi_perfil.xhtml"/>
+                            <p:commandButton value="Cerrar sesión" action="#{seguridadBean.cerrarSesion()}" styleClass="ui-button-outlined ui-badge-primary me-2" />
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <div>
+        <ui:insert name="contenido"/>
+    </div>
+
+    <div class="container">
+        <footer class="d-flex flex-wrap justify-content-between align-items-center py-4 my-8 ">
+            <div class="col-md-4 d-flex align-items-center">
+                <a href="/" class="mb-1 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+                    <h:graphicImage library="img" name="nicine.png" styleClass="img_icon me-2"/>
+                </a>
+            </div>
+        </footer>
+    </div>
+
+    <p:dialog header="Iniciar sesión" showEffect="fade" widgetVar="login" modal="true"
+              rendered="#{!seguridadBean.autenticado}" blockScroll="true" draggable="false" >
+
+        <h:form>
+
+            <div class="container iniciar-sesion" >
+                <div style="align-self: center; align-content: center; text-align: center">
+                    <p:outputLabel for="cedula_login" value="Cédula:" styleClass="me-4"/>
+                    <p:inputText id="cedula_login" value="#{seguridadBean.cedula}" required="true"/>
+                    <p:message for="cedula_login"/>
+                </div>
+
+                <div style="align-self: center; align-content: center; text-align: center; margin-top: 10px">
+                    <p:outputLabel for="password_login" value="Password:" styleClass="me-3" />
+                    <p:password id="password_login" value="#{seguridadBean.password}" required="true"/>
+                    <p:message for="password_login"/>
+                </div>
+
+                <p:commandButton value="Iniciar Sesión" action="#{seguridadBean.iniciarSesionCliente()}"
+                                 styleClass="mt-4" update="@form, barra_nav" icon="pi pi-sign-in" iconPos="left"/>
+
+                <p:commandButton type="button" value="¿Olvidaste la contraseña?" styleClass="ui-button-secondary ui-button-flat"
+                                 onclick="PF('olvidaste_contrasenia').show()"/>
+
+                <p:growl for="login-bean" showDetail="true"/>
+
+            </div>
+
+        </h:form>
+    </p:dialog>
+
+    <p:dialog header="Recuperar contraseña" showEffect="fade" widgetVar="olvidaste_contrasenia" modal="true" >
+        <h:form>
+            <h:panelGrid columns="3" cellpadding="5">
+                <p:outputLabel for="email_recuperacion" value="Email de recuperación:"/>
+                <p:inputText id="email_recuperacion" value="#{seguridadBean.email}" required="true" />
+                <p:message for="email_recuperacion"/>
+            </h:panelGrid>
+            <div>
+                <p:commandButton value="Enviar correo" action="#{seguridadBean.reestablecerContrasenia()}"
+                                 styleClass="mt-4" update="@form" icon="pi pi-sign-in" iconPos="left" oncomplete="PF('olvidaste_contrasenia').hide()"/>
+            </div>
+            <p:growl for="recuperacion" showDetail="true"/>
+        </h:form>
+    </p:dialog>
+
+</h:body>
+
+</html>

@@ -1,0 +1,107 @@
+.img_icon{
+    max-width: 100px;
+}
+
+.busqueda_form{
+    width: 300px;
+}
+
+.cuerpo_pagina{
+    background-color: rgba(0, 0, 0, .1);
+    border: solid rgba(0, 0, 0, .15);
+    border-width: 1px 0 ;
+    box-shadow: inset 0 0.5em 1.5em rgb(0 0 0 / 10%), inset 0 0.125em 0.5em rgb(0 0 0 / 15%);
+}
+
+.item_pelicula{
+    background: white;
+}
+
+.item_carrusel{
+    background: #bdbdbd;
+}
+
+.chip-genero{
+    font-size: 14px;
+}
+
+.imagen-pelicula{
+    width: 200px;
+}
+.imagen-pelicula img{
+    width: 100%;
+    height: auto;
+}
+.formulario-registro{
+    text-align: center;
+}
+
+.descripcion-pelicula {
+    margin-top: 3%;
+    align-self: flex-end;
+    width: 30%;
+}
+.contenido_pagina{
+    display: flex;
+    justify-content: space-between;
+}
+.izquierda{
+    width: 40%;
+    margin-top: 3%;
+    margin-left: 8%;
+    float:left;
+}
+.derecha{
+    width: 60%;
+    margin-left: 3%;
+    margin-top: 3%;
+    margin-right: 8%;
+    float: right;
+}
+.featurette-divider {
+    margin: 5rem 0; /* Space out the Bootstrap <hr> more */
+}
+@media(min-width: 62em) {
+    .featurette-heading {
+        margin-top: 7rem;
+    }
+}
+.imagen-confiteria{
+    height: 100px;
+    width: 100px;
+}
+.product{
+    align-self: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    margin-right: 3%;
+}
+.elegir-numero-entradas{
+    align-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.iniciar-sesion{
+    text-align: center;
+    align-items: center;
+    align-content: center;
+}
+.btn-registro{
+    text-decoration-line: none;
+}
+.sin-linea a{
+    text-decoration: none;
+}
+
+.item-fila-1{
+    margin-top: 40px;
+}
+.carousel-inner {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    justify-content: center;
+    text-align: end;
+}
