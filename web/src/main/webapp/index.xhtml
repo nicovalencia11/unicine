@@ -16,8 +16,6 @@
                     <div class="row">
                         <p:repeat value="#{inicioBean.peliculasCartelera}" var="pelicula">
                             <div class="col-md-6">
-                                <a href="detalle_pelicula.xhtml?pelicula_id=#{pelicula.codigo}"
-                                   class="text-decoration-none">
                                     <div class="row g-0 border rounded overflow-hidden flex-md-row mb-4 shadow-sm h-md-250 position-relative item_pelicula">
                                         <div class="col p-4 d-flex flex-column position-static">
                                             <div class="d-inline-block mb-2">
@@ -32,7 +30,6 @@
                                             <img src="#{pelicula.imagen}" alt="#{pelicula.nombre}"/>
                                         </div>
                                     </div>
-                                </a>
                             </div>
                         </p:repeat>
                     </div>

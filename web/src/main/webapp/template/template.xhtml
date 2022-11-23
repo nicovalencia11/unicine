@@ -27,14 +27,13 @@
                         <h:graphicImage library="img" name="nicine.png" styleClass="img_icon me-2"/>
                     </a>
                     <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                        <li><a href="#" class="nav-link px-2 text-black">En Cartelera</a></li>
-                        <li><a href="#" class="nav-link px-2 text-black">Próximamente</a></li>
+                        <li><a href="#" class="nav-link px-2 text-black">Cartelera</a></li>
                         <li><a href="#" class="nav-link px-2 text-black">Confitería</a></li>
                     </ul>
 
                     <div class="text-end">
                         <h:form rendered="#{!seguridadBean.autenticado}">
-                            <p:commandButton value="Login" oncomplete="PF('login').show()" styleClass="ui-button-outlined ui-badge-primary me-2" />
+                            <p:commandButton value="Iniciar sesión" oncomplete="PF('login').show()" styleClass="ui-button-outlined ui-badge-dark me-2" />
                             <p:linkButton value="Registrarse" href="/registroCliente.xhtml" styleClass="sin-linea"/>
                         </h:form>
 
@@ -69,13 +68,13 @@
 
             <div class="container iniciar-sesion" >
                 <div style="align-self: center; align-content: center; text-align: center">
-                    <p:outputLabel for="cedula_login" value="Cédula:" styleClass="me-4"/>
-                    <p:inputText id="cedula_login" value="#{seguridadBean.cedula}" required="true"/>
+                    <p:outputLabel for="cedula_login" value="Correo:" styleClass="me-4"/>
+                    <p:inputText id="cedula_login" value="#{seguridadBean.correo}" required="true"/>
                     <p:message for="cedula_login"/>
                 </div>
 
                 <div style="align-self: center; align-content: center; text-align: center; margin-top: 10px">
-                    <p:outputLabel for="password_login" value="Password:" styleClass="me-3" />
+                    <p:outputLabel for="password_login" value="Contraseña:" styleClass="me-3" />
                     <p:password id="password_login" value="#{seguridadBean.password}" required="true"/>
                     <p:message for="password_login"/>
                 </div>

@@ -11,7 +11,7 @@
     <ui:define name="contenido">
         <div class="container">
             <div class="row mt-4 mb-4" >
-                <p:panel header="Registro de clientes">
+                <p:panel header="Registro">
                     <h:form>
                         <h:panelGrid columns="3" cellpadding="5" styleClass="align-items-center">
 
@@ -20,11 +20,11 @@
                             <p:message for="cedula_cliente"/>
 
                             <p:outputLabel for="nombre_cliente" value="Nombre completo: " />
-                            <p:inputText id="nombre_cliente" value="#{clienteBean.cliente.nombreCompleto}" required="true" size="60" />
+                            <p:inputText id="nombre_cliente" value="#{clienteBean.cliente.nombre}" required="true" size="60" />
                             <p:message for="nombre_cliente"/>
 
                             <p:outputLabel for="contrasenia_cliente" value="Contraseña: " />
-                            <p:password id="contrasenia_cliente" value="#{clienteBean.cliente.contrasenia}" required="true" size="60" />
+                            <p:password id="contrasenia_cliente" value="#{clienteBean.cliente.usuario.password}" required="true" size="60" />
                             <p:message for="contrasenia_cliente"/>
 
                             <p:outputLabel for="conf_contrasenia_cliente" value="Confirmar contraseña: " />
@@ -32,20 +32,12 @@
                             <p:message for="conf_contrasenia_cliente"/>
 
                             <p:outputLabel for="email_cliente" value="Email: " />
-                            <p:inputText id="email_cliente" value="#{clienteBean.cliente.email}" required="true" size="60" />
+                            <p:inputText id="email_cliente" value="#{clienteBean.cliente.correo}" required="true" size="60" />
                             <p:message for="email_cliente"/>
-
-                            <p:outputLabel for="direccion_cliente" value="Direccion: " />
-                            <p:inputText id="direccion_cliente" value="#{clienteBean.cliente.direccion}" required="true" size="60" />
-                            <p:message for="direccion_cliente"/>
-
-                            <p:outputLabel for="edad_cliente" value="Edad: " />
-                            <p:inputText id="edad_cliente" value="#{clienteBean.cliente.edad}" required="true" size="60" />
-                            <p:message for="edad_cliente"/>
 
                         </h:panelGrid>
 
-                        <p:commandButton action="#{clienteBean.registrarCliente()}" value="Registrarse" update="@form" />
+                        <p:commandButton action="#{clienteBean.registrarCliente()}" styleClass="text-center" value="Registrarse" update="@form" />
                         <p:growl for="mensaje_bean" showDetail="true" />
                     </h:form>
                 </p:panel>
